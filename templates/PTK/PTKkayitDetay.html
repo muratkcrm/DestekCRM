@@ -1,0 +1,91 @@
+{% extends "PTK/layout60.html" %}
+{% load static%}
+{% block ust_icerik %}
+
+{% endblock ust_icerik %}
+
+{% block body %}
+    {% load crispy_forms_tags %}
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Preview Image -->
+            <img class="img-fluid rounded" src="{{ PersonelKayits.PersonelKayits.url }}"/>
+            <!-- Post Content -->
+            <form method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+
+        <div class="row">
+         <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel kayıt No: </strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.id}}</div>
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Tc Kimlik No: </strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.PTKTckimlik}}</div>
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Adı-Soyadı : </strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.PTKAdiSoyadi}}</div>
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Firma Adı :</strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.PTKFirmaAdi }}</div>
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel İşe Giriş Tarihi :</strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{PersonelKayit.PTKIseGiristarihi|date:"d-m-Y" }}</div>
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel İşe Çıkış Tarihi :</strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{PersonelKayit.PTKIseCikistarihi|date:"d-m-Y" }}</div>
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel İzin Hakedilen Yıl :</strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{PersonelKayit.PTKHakedilenIzinYil }}</div>
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel İzin Hakedilen Gün :</strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{PersonelKayit.PTKHakedilenIzinGun }}</div>    
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel İzin Kullanılan Gün :</strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{PersonelKayit.PTKIzinSuresiGun }}</div>
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel İzin Kullanılan Saat :</strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{PersonelKayit.PTKIzinSuresiSaat }}</div>           
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Adres ilçe/il  :</strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-93 float-left py-1">{{ PersonelKayit.PTKAdres|safe }} /{{ PersonelKayit.PTKIlce|safe }}/{{ PersonelKayit.PTKIl|safe }}</div>
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Email Adresi  :</strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.PTKEmail|safe}}</div>
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Telefon Numarası  :</strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.PTKTelefon|safe}}</div>
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Açıklama:</strong></div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.PTKAciklama|safe}}</div>
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Durumu  :</strong> </div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.PTKDurumu|safe}}</div>
+      <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong><h3>KALAN İZİN SÜRESİ GÜN :</h3></strong> </div>
+         <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1"><h3>{{ PersonelKayit.PTKkalanizin|safe}}</h3></div>        
+
+            {% if PersonelKayit.NotDosya %}
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Kayıt Eklenen Dosya  :</strong> </div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.DestekTalebiDosya|safe}}</div>
+                <a href="{{ PersonelKayit.PTKDosya.url }}"> <img class="img-responsive" style="max-width: 250px; max-height: 200px" src="{{ PersonelKayit.PTKDosya.url }}"></a>
+            {% endif %}
+
+        </div>
+
+            {% if request.user.is_superuser == True or perms.PerTakip.change_pertakipkayit %}
+            <div class="col-12 pt-3">
+            <a href="/PerTakip/PTKkayitGuncelle/{{PersonelKayit.id}}" class="btn btn-primary">Güncelle</a>
+            {% endif %}
+
+            {% if request.user.is_superuser == True or perms.PerTakip.add_pertakipnotlar %}
+            <a href="/PerTakip/PTKkayitNotEkle/{{PersonelKayit.id}}" class="btn btn-success">Personel Not Ekle</a>
+            {% endif %}
+
+            {% if request.user.is_superuser == True or perms.PerTakip.change_pertakipkayit %}
+            <a href="/PerTakip/PTKkayitHesaplama/{{PersonelKayit.id}}" class="Hesaplama btn btn-primary">Hesaplama</a>
+            {% endif %}
+
+            <a href="/PerTakip/PTKkayitacik" class="btn btn-danger py-2 px-4 white mr-2 " >Kayit Aramaya Git</a>
+            </div>
+            </form>
+            {% if PersonelKayitNot %}
+            {% include "PTK/includes/PTKTakipNotDetay.html" %}
+            {% else %}
+            {{ "Kayıt ilişkin NOT Bulunmamaktadır......" }}
+            {% endif %}
+
+            {% if PersonelKayitizin %}
+            {% include "PTK/includes/PTKTakipizinDetay.html" %}
+            {% else %}
+            {{ "Kayıt ilişkin NOT Bulunmamaktadır......" }}
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock body %}

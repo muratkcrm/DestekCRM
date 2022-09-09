@@ -1,0 +1,40 @@
+{% extends "YON/layout4.html" %}
+
+{% block body %}
+    <div class="container">
+        <h3 class="text-center">Kategori İşlemleri</h3>
+        <hr>
+    </div>
+    {% if Kategoris %}
+    <div class="container">
+        <div class="row border border-darken-1">
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">K. No</div>
+            <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center d-none d-sm-block">Kategori Adı</div>
+            <div class="col-5 col-md-5 col-sm-5 border-left border-darken-1 py-2 text-center">Açıklama</div>
+            <div class="col-2 col-md-2 col-sm-5 border-left border-darken-1 py-2 text-center">Aktiflik</div>
+            <div class="col-2 col-md-2 col-sm-3 border-left border-darken-1 py-2 text-center">Güncelle</div>
+        </div>
+
+            {% for Kategori in Kategoris %}
+
+        <div class="row border border-darken-1">
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">{{Kategori.id}}</div>
+            <div class="col-2 col-md-2 border-left border-darken-1 py-2 d-none d-sm-block">{{Kategori.KategoriAdi}}</div>
+            <div class="col-5 col-md-5 col-sm-5 border-left border-darken-1 py-2">{{Kategori.KategoriAciklama|truncatewords:1}}</div>
+            <div class="col-2 col-md-2 border-left border-darken-1 py-2 d-none d-sm-block">{{Kategori.KategoriAktif}}</div>
+            <div class="col-2 col-md-2 col-sm-3 border-left border-darken-1 py-2 text-center">
+                <a href="/Yonetim/YONkategoriGuncelle/{{Kategori.id}}" class="btn btn-primary">Aktiflik</a>
+            </div>
+        </div>
+
+            {% endfor %}
+
+    </div>
+{% else %}
+
+<div class="alert alert-danger">
+    Silinen Kayıt Kalmadı...
+</div>
+{% endif %}
+
+{% endblock body %}

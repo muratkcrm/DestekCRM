@@ -1,0 +1,46 @@
+{% extends "TLP/layout2.html" %}
+
+{% block body %}
+
+    <div class="container">
+        <h3 class="text-center">Ürün Tanımlama İşlemleri</h3>
+        {% if perms.TalepYonetimi.add_uygulama %}
+            <a style="float: right;" class="btn btn-success py-2 px-4 white mr-2 " href="/TalepYonetimi/TLPuygulamaEkle">Ürün Ekle</a>
+        {% endif %}
+        <br>
+        <hr>
+    </div>
+    {% if Uygulamas %}
+    <div class="container">
+        <div class="row border border-darken-1">
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">U. No</div>
+                <div class="col-3 col-md-3 border-left border-darken-1 py-2 text-center d-none d-sm-block">Ürün Adı</div>
+                <div class="col-6 col-md-5 col-sm-4  border-left border-darken-1 py-2 text-center">Açıklama</div>
+                <div class="col-2 col-md-3 col-sm-4  border-left border-darken-1 py-2 text-center">Detay</div>
+        </div>
+
+            {% for Uygulama in Uygulamas %}
+
+        <div class="row border border-darken-1">
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">{{Uygulama.id}}</div>
+            <div class="col-3 col-md-3 border-left border-darken-1 py-2 d-none d-sm-block">{{Uygulama.UygulamaAdi}}</div>
+            <div class="col-6 col-md-5 col-sm-4 border-left border-darken-1 py-2">{{Uygulama.UygulamaAciklama|truncatewords:2}}</div>
+            <div class="col-2 col-md-3 col-sm-4 border-left border-darken-1 py-2 text-center">
+            {% if perms.TalepYonetimi.change_uygulama %}
+                <a href="/TalepYonetimi/TLPuygulamaGuncelle/{{Uygulama.id}}" class="btn btn-primary">Güncelle</a>
+            {% endif %}
+            </div>
+        </div>
+
+            {% endfor %}
+
+    </div>
+
+{% else %}
+
+<div class="alert alert-danger">
+    Henüz Bilgi Girişi Yapılmamış...
+</div>
+{% endif %}
+
+{% endblock body %}

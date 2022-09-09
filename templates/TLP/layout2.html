@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="tr" class="loading">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../static/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="../../static/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/assets/libs/css/style.css">
+    <link rel="stylesheet" href="../../static/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="stylesheet" href="../../static/assets/vendor/charts/chartist-bundle/chartist.css">
+    <link rel="stylesheet" href="../../static/assets/vendor/charts/morris-bundle/morris.css">
+    <link rel="stylesheet"
+          href="../../static/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../static/assets/vendor/charts/c3charts/c3.css">
+    <link rel="stylesheet" href="../../static/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <link rel="shortcut icon" type="image/png" href="../../static/assets/img/crmlogo1.png"/>
+    <title>WFAcrm</title>
+    {% block ust_icerik %}
+    {% endblock ust_icerik %}
+</head>
+
+<body>
+{% if perms.TalepYonetimi %}
+
+    <div class="dashboard-main-wrapper">
+
+        <div class="nav-left-sidebar sidebar-dark">
+            <div class="menu-list">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="d-xl-none d-lg-none" href="#"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-divider">
+                                Merhaba {{ request.user.first_name }} {{ request.user.last_name }}
+                                {% now "j F Y H:i" %}
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true" data-target="#submenu-1" aria-controls="submenu-1"><i class="fab fa-fw fa-wpforms"></i>Istek Yönetimi<span class="badge badge-success"></span></a>
+                                <div id="submenu-1" class="collapse submenu" >
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                        {% if perms.TalepYonetimi.add_destektalebikayit %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'TalepYonetimi:kayitEkle' %}">Yeni Istek Girişi</a>
+                                            </li>
+                                        {% endif %}
+                                        {% if perms.TalepYonetimi.view_destektalebikayit %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'TalepYonetimi:kayitacik' %}">Tanımlı Istek</a>
+                                            </li>
+                                        {% endif %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="/TalepYonetimi/TLPDestekTalebiIstatistik/">İstatistik</a>
+                                            </li>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7"><i class="fas fa-fw fa-inbox"></i>Duyurular</a>
+                            <div id="submenu-7" class="collapse submenu" >
+                                <ul class="nav flex-column">
+                                    {% if perms.TalepYonetimi.add_duyurular %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/TalepYonetimi/TLPDuyuruEkle/">Yeni Duyuru</a>
+                                    </li>
+                                    {% endif %}
+                                    {% if perms.TalepYonetimi.view_duyurular %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/TalepYonetimi/TLPDuyurular/">Tüm Duyurular</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+
+
+                            <li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-15" aria-controls="submenu-15"><i class="fas fa-cog mr-2"></i>Tanımlama</a>
+                                    <div id="submenu-15" class="collapse submenu" >
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                            {% if perms.TalepYonetimi.add_kurumlar or perms.TalepYonetimi.change_kurumlar or perms.TalepYonetimi.delete_kurumlar or perms.TalepYonetimi.view_kurumlar %}
+                                                 <a class="nav-link" href="{% url 'TalepYonetimi:kurumlar' %}">Kurum tanımlama</a>
+                                            {% endif %}
+                                            </li>
+
+                                            <li class="nav-item">
+                                            {% if perms.TalepYonetimi.add_kurumBirimi or perms.TalepYonetimi.change_kurumBirimi or perms.TalepYonetimi.delete_kurumBirimi or perms.TalepYonetimi.view_kurumbirimi %}
+                                                <a class="nav-link" href="{% url 'TalepYonetimi:kurumBirimi' %}">Birim Tanımlama</a>
+                                            {% endif %}
+                                            </li>
+
+                                            {% if perms.TalepYonetimi.add_uygulama or perms.TalepYonetimi.change_uygulama or perms.TalepYonetimi.delete_uygulama or perms.TalepYonetimi.view_uygulama %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'TalepYonetimi:uygulama' %}">Ürün/Modül Tanımlama</a>
+                                            </li>
+                                            {% endif %}
+                                            {% if perms.TalepYonetimi.add_destektalebituru or perms.TalepYonetimi.change_destektalebituru or perms.TalepYonetimi.delete_destektalebituru or perms.TalepYonetimi.view_destektalebituru %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'TalepYonetimi:DestekTalebiTuru' %}">Istek Türü Tanımlama</a>
+                                            </li>
+                                            {% endif %}
+                                            {% if perms.TalepYonetimi.add_kategori or perms.TalepYonetimi.change_kategori or perms.TalepYonetimi.delete_kategori or perms.TalepYonetimi.view_kategori %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'TalepYonetimi:kategori' %}">Kategori Tanımlama</a>
+                                            </li>
+                                            {% endif %}
+                                            <!--{% if perms.TalepYonetimi.add_kisi or perms.TalepYonetimi.change_kisi or perms.TalepYonetimi.delete_kisi or perms.TalepYonetimi.view_kisi %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'TalepYonetimi:kisi' %}">Kisi Tanımlama</a>
+                                            </li>-->
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </li>
+                            </li>
+
+
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-11" aria-controls="submenu-11"><i class="fas fa-fw fa-user-circle"></i>Profil Ayarları </a>
+                                <div id="submenu-11" class="collapse submenu" >
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/TalepYonetimi/Userprofil/">Profil Düzenleme</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/TalepYonetimi/UserPasswordChange/">Şifre Değişikliği</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            <a class="nav-link" href="/" ><i class="fas fa-exchange-alt"></i>Uygulama Değiştir</a>
+                            <a class="nav-link" href="/user/logout/" ><i class="fa fa-fw fa-power-off"></i>Çıkış</a>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+
+        <div class="dashboard-wrapper">
+
+		    {% include "TLP/includes/navbar.html" %}
+            <div class="container bg-light my-3 py-3 px-4">
+                        {% if messages %}
+                        <ul class='message'>
+                            {% for message in messages %}
+                                {% if message.tags == "info" %}
+                                    <div class="alert alert-danger">{{ message }}</div>
+                                {% else %}
+                                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                {% block body %}
+                {% endblock body %}
+             </div>
+
+
+        {% include "footer.html" %}
+
+        </div>
+
+    </div>
+
+    <!-- jquery 3.3.1 -->
+    <script src="../../static/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <!-- bootstap bundle js -->
+    <script src="../../static/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- slimscroll js -->
+    <script src="../../static/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <!-- main js -->
+    <script src="../../static/assets/libs/js/main-js.js"></script>
+    <!-- chart chartist js -->
+    <script src="../../static/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+    <!-- sparkline js -->
+    <script src="../../static/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+    <!-- morris js -->
+    <script src="../../static/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+    <script src="../../static/assets/vendor/charts/morris-bundle/morris.js"></script>
+    <!-- chart c3 js -->
+{% else %}
+    <div><h1>Yetkiniz Yoktur..</h1></div>
+{% endif %}
+</body>
+
+</html>

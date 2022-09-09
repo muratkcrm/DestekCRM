@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="tr" class="loading">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../static/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/assets/vendor/fonts/circular-std/style.css" >
+    <link rel="stylesheet" href="../../static/assets/libs/css/style.css">
+    <link rel="stylesheet" href="../../static/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="stylesheet" href="../../static/assets/vendor/charts/chartist-bundle/chartist.css">
+    <link rel="stylesheet" href="../../static/assets/vendor/charts/morris-bundle/morris.css">
+    <link rel="stylesheet"
+          href="../../static/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../static/assets/vendor/charts/c3charts/c3.css">
+    <link rel="stylesheet" href="../../static/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <link rel="shortcut icon" type="image/png" href="../../static/assets/img/crmlogo1.png"/>
+
+
+    <title>FASTSOFT</title>
+    {% block ust_icerik %}
+    {% endblock ust_icerik %}
+</head>
+
+<body>
+{% if perms.PerTakip %}
+
+    <div class="dashboard-main-wrapper">
+
+        <div class="nav-left-sidebar sidebar-dark">
+            <div class="menu-list">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="d-xl-none d-lg-none" href="#"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-divider">
+                                Merhaba {{ request.user.first_name }} {{ request.user.last_name }}
+                                {% now "j F Y H:i" %}
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true" data-target="#submenu-1" aria-controls="submenu-1"><i class="fab fa-fw fa-wpforms"></i>Personel Kartı<span class="badge badge-success"></span></a>
+                                <div id="submenu-1" class="collapse submenu" >
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                        {% if perms.PerTakip.add_pertakipkayit %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'PerTakip:PTKkayitEkle' %}">Personel Kayıt Girişi</a>
+                                            </li>
+                                        {% endif %}
+                                        {% if perms.PerTakip.view_pertakipkayit %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'PerTakip:PTKkayitacik' %}">Personel Bilgileri</a>
+                                            </li>
+                                        {% endif %}
+                                        {% if perms.PerTakip.view_pertakipkayit %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'PerTakip:PTKkayitacikizindurum' %}">Personel İzin Durumları</a>
+                                        </li>
+                                    {% endif %}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-fw fa-inbox"></i>Personel İzin İşlemleri</a>
+                            <div id="submenu-3" class="collapse submenu">
+                                <ul class="nav flex-column">
+                                    {% if perms.PerTakip.add_perizindurum %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/PerTakip/PTKIzinKayit/">izin işlemleri</a>
+                                    </li>
+                                    {% endif %}
+                                    {% if perms.PerTakip.view_perizindurum %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/PerTakip/PTKIzinKayit/">izin raporları</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7"><i class="fas fa-fw fa-inbox"></i>Duyurular</a>
+                            <div id="submenu-7" class="collapse submenu" >
+                                <ul class="nav flex-column">
+                                    {% if perms.PerTakip.add_ptkduyurular %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/PerTakip/PTKDuyurular/">Yeni Duyuru</a>
+                                    </li>
+                                    {% endif %}
+                                    {% if perms.PerTakip.view_ptkduyurular %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/PerTakip/PTKDuyurular/">Tüm Duyurular</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-11" aria-controls="submenu-11"><i class="fas fa-fw fa-user-circle"></i>Profil Ayarları </a>
+                                <div id="submenu-11" class="collapse submenu" >
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/PerTakip/Userprofil/">Profil Düzenleme</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/PerTakip/UserPasswordChange/">Şifre Değişikliği</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            <a class="nav-link" href="/" ><i class="fas fa-exchange-alt"></i>Uygulama Değiştir</a>
+                            <a class="nav-link" href="/user/logout/" ><i class="fa fa-fw fa-power-off"></i>Çıkış</a>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+
+        <div class="dashboard-wrapper">
+
+		    {% include "PTK/includes/navbar.html" %}
+            <div class="container bg-light my-3 py-3 px-4">
+                        {% if messages %}
+                        <ul class='message'>
+                            {% for message in messages %}
+                                {% if message.tags == "info" %}
+                                    <div class="alert alert-danger">{{ message }}</div>
+                                {% else %}
+                                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                {% block body %}
+                {% endblock body %}
+             </div>
+
+
+        {% include "footer.html" %}
+
+        </div>
+
+    </div>
+      <!-- jquery 3.3.1 -->
+     <script src="../../static/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+     <!-- bootstap bundle js -->
+     <script src="../../static/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+     <!-- slimscroll js -->
+     <script src="../../static/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+     <!-- main js -->
+     <script src="../../static/assets/libs/js/main-js.js"></script>
+     <!-- chart chartist js -->
+     <script src="../../static/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+     <!-- sparkline js -->
+     <script src="../../static/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+     <!-- morris js -->
+     <script src="../../static/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+     <script src="../../static/assets/vendor/charts/morris-bundle/morris.js"></script>
+     <!-- chart c3 js -->
+{% else %}
+    <div><h1>Yetkiniz Yoktur..</h1></div>
+{% endif %}
+</body>
+
+</html>

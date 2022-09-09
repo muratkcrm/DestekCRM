@@ -1,0 +1,22 @@
+{% load crispy_forms_tags %}
+<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 float-left border-right clearfix">
+    Sözleşme Bitişi Takip Edilen Kurumlar
+    <div class="border-3 border-top border-top-primary mt-2">
+        {% if SozlesmeTakips %}
+        <div  class="col-12 py-3 font-18 font-weight-bold">
+            <div class="col-4 float-left">Bitiş Tarihi</div> <div class="col-8 float-left">Kurum Adı</div>
+        </div>
+            {% for SozlesmeTakip in SozlesmeTakips %}
+                <a href="/Satis/STSsozlesmedetay/{{ SozlesmeTakip.id }}">
+                    <div  class="col-12 py-3">
+                        <div class="col-4 float-left">{{ SozlesmeTakip.SatisSozlesmeBitisTarihi }} </div> <div class="col-8 float-left">{{ SozlesmeTakip.SatisSozlesmeKurum }}</div>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-danger">
+                Henüz Sözleşme Girilmemiştir.
+            </div>
+        {% endif %}
+        </div>
+</div>

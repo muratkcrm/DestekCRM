@@ -1,0 +1,53 @@
+{% extends "YON/layout4.html" %}
+
+{% block body %}
+    <div class="container">
+        <h3 class="text-center">Kullanıcı İşlemleri</h3>
+        {% if perms.Yonetim.add_user %}
+            <a style="float: right;" class="btn btn-success py-2 px-4 white mr-2 " href="/Yonetim/YONregisterEkle">Kullanıcı Ekle</a>
+        {% endif %}
+        <br>
+        <hr>
+    </div>
+    {% if formuser1 %}
+    <div class="container">
+        <div class="row border border-darken-1">
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">K. No</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center">Kullanıcı Adı</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center">Adı Soyadı</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center">Email</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center">Telefon</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center ">Aktiflik</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center ">Şifre</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center ">Detay</div>
+        </div>
+
+            {% for formuser in formuser1 %}
+
+        <div class="row border border-darken-1">
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">{{formuser.id}}</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2">{{formuser.username}}</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 d-none d-sm-block">{{formuser.first_name}} {{ formuser.last_name }}</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 d-none d-sm-block">{{formuser.email}}</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 d-none d-sm-block">{{ formuser.telefon }}</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 d-none d-sm-block">{{formuser.is_active}}</div>
+                {% if perms.Yonetim.add_user %}
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center">
+                        <a href="/Yonetim/UserparolarReset/{{formuser.id}}" class="btn btn-danger">Şifre</a>
+                </div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center">
+                        <a href="/Yonetim/YONregisterGuncelle/{{formuser.id}}" class="btn btn-primary">Detay</a>
+                </div>
+                {% endif %}
+        </div>
+            {% endfor %}
+
+    </div>
+{% else %}
+
+<div class="alert alert-danger">
+    Silinen Kayıt Kalmadı...
+</div>
+{% endif %}
+
+{% endblock body %}

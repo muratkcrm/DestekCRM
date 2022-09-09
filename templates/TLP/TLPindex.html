@@ -1,0 +1,119 @@
+{% extends "TLP/layout2.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="ecommerce-widget">
+
+    <div class="row py-3">
+        {% include "TLP/includes/indexduyuru.html" %}
+        {% include "TLP/includes/indexkayitlar.html" %}
+    </div>
+
+    <div class="row text-center">
+
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 statindex">
+            <div class="card border-3 border-top border-secondary">
+                <a href="../../TalepYonetimi/TLPkurumlar">
+                    <div class="card-body">
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">
+                                {{ request.session.KurumSayisis}}
+                            </h1>
+                        <h5 class="text-muted">Sözleşme yapılan Firma/Kurum</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 statindex">
+            <div class="card border-3 border-top border-secondary">
+                <a href="../../TalepYonetimi/TLPkurumBirimi">
+                    <div class="card-body">
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">
+                                {{ request.session.BirimSayisis}}
+                            </h1>
+
+                        <h5 class="text-muted">Alt Şube/Birim</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 statindex">
+            <div class="card border-3 border-top border-secondary">
+                <a href="../../TalepYonetimi/TLPuygulama">
+                    <div class="card-body">
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">
+                                {{ request.session.UygulamaSayisi}}
+                            </h1>
+                        <h5 class="text-muted">Ürün</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!--
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 statindex">
+            <div class="card border-3 border-top border-secondary">
+                <a href="../../TalepYonetimi/TLPkisi">
+                    <div class="card-body">
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">
+                                {{ request.session.KisiSayisi}}
+                            </h1>
+                        <h5 class="text-muted">Kayıtlı Kullanıcı</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+-->
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 statindex">
+            <div class="card border-3 border-top border-secondary">
+                <a href="#">
+                    <div class="card-body">
+                        <h5 class="text-muted">Toplam Istek Sayısı</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">{{ request.session.DestekTalebisayisis }}</h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 statindex">
+            <div class="card border-3 border-top border-secondary">
+               <a href="../../TalepYonetimi/TLPkayitacik">
+                   <div class="card-body">
+                        <h5 class="text-muted">Açık Istek Sayısı</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">{{ request.session.DestekTalebisayisiAktifs }}</h1>
+                        </div>
+                    </div>
+               </a>
+            </div>
+        </div>
+
+         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 statindex">
+             <div class="card border-3 border-top border-secondary">
+                 <a href="../../TalepYonetimi/TLPkayitkapali">
+                     <div class="card-body">
+                         <h5 class="text-muted">Kapalı Istek Sayısı</h5>
+                         <div class="metric-value d-inline-block">
+                             <h1 class="mb-1 text-center">{{ request.session.DestekTalebisayisiPasifs }}</h1>
+                         </div>
+                     </div>
+                 </a>
+             </div>
+         </div>
+    </div>
+</div>
+
+
+
+{% endblock body %}

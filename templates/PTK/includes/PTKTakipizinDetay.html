@@ -1,0 +1,49 @@
+{% load crispy_forms_tags %}
+
+<div class="container">
+    <div class="row border border-darken-1">
+
+            {% if PersonelKayitizin %}
+            <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Kayıt No</div>
+            <div class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">Personel Adı-Soyadı</div>
+            <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-lg-block">Dönemi</div>
+            <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-lg-block">Izin Baslama Tarihi</div>
+            <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Izin Bitis Tarihi</div>
+            <div class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Izin Konusu</div>
+            <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Izin Süresi Gün</div>
+            <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Izin Süresi Saat</div>
+            <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Izin Onay Veren</div>
+             <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center">Detay</div>
+        </div>
+
+            {% for PersonelKayitizins in PersonelKayitizin %}
+            <div class="row border border-darken-1 clearfix">
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block" value="{{ request.GET.Kelime }}">{{PersonelKayitizins.id}}</div>
+                <div class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block"><a href="/PerTakip/PTKIzinDetay/{{PersonelKayitizins.id}}">{{PersonelKayitizins.PerTakipKayit| truncatechars:"20"|safe}}</a></div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block"><a href="/PerTakip/PTKIzinDetay/{{PersonelKayitizins.id}}">{{PersonelKayitizins.PerIzinDonemi| truncatechars:"4"|safe}}</a></div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block"><a href="/PerTakip/PTKIzinDetay/{{PersonelKayitizins.id}}">{{PersonelKayitizins.PerIzinBaslatarihi|date:"d-m-Y" }}</a></div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-xl-block"><a href="/PerTakip/PTKIzinDetay/{{PersonelKayitizins.id}}">{{PersonelKayitizins.PerIzinBitistarihi|date:"d-m-Y" }}</a></div>
+                <div class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-1 border-left border-darken-1 py-3 px-1 text-center d-none d-xl-block"><a href="/PerTakip/PTKIzinDetay/{{PersonelKayitizins.id}}">{{PersonelKayitizins.PerIzinKonu|default:""}}</a></div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-xl-block"><a href="/PerTakip/PTKIzinDetay/{{PersonelKayitizins.id}}">{{PersonelKayitizins.PerIzinSuresiGun|floatformat:0 }}</a></div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-xl-block"><a href="/PerTakip/PTKIzinDetay/{{PersonelKayitizins.id}}">{{PersonelKayitizins.PerIzinSuresiSaat|floatformat:0 }}</a></div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block"><a href="/PerTakip/PTKIzinDetay/{{PersonelKayitizins.id}}">{{PersonelKayitizins.PerIzinOnayVeren|safe}} </a></div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 border-left border-darken-1 py-2 px-1 text-center col-xs-2">
+
+                {% if request.user.is_superuser == True or perms.PerTakip.add_perizindurum %}
+                    <a href="/PerTakip/PTKIzinDetay/{{PersonelKayitizins.id}}" class="btn btn-primary py-2 px-2 white mr-2">islem</a>
+                {% else %}
+                    <a href="/PerTakip/PTKIzinDetay/{{PersonelKayitizins.id}}" class="btn btn-danger py-2 px-2 white mr-2">Gör</a>
+                {% endif %}
+
+                </div>
+        </div>
+
+            {% endfor %}
+
+                {% for contact in contacts %}
+                    {# Each "contact" is a Contact model object. #}
+                    {{ contact.full_name|upper }}<br>
+                    ...
+                {% endfor %}
+            {%endif%}
+   </div>

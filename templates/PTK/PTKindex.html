@@ -1,0 +1,45 @@
+{% extends "PTK/layout60.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="ecommerce-widget">
+
+    <div class="row py-3">
+        {% include "PTK/includes/indexduyuru.html" %}
+        {% include "PTK/includes/indexkayitlar.html" %}
+    </div>
+
+    <div class="row text-center">
+
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 statindex">
+            <div class="card border-3 border-top border-secondary">
+               <a href="../../PerTakip/PTKkayitacik">
+                   <div class="card-body">
+                        <h5 class="text-muted">Çalışan Personel Sayısı</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">{{ request.session.PersonelsayisiAktifs }}</h1>
+                        </div>
+                    </div>
+               </a>
+            </div>
+        </div>
+
+         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 statindex">
+             <div class="card border-3 border-top border-secondary">
+                 <a href="../../PerTakip/PTKkayitkapali">
+                     <div class="card-body">
+                         <h5 class="text-muted">İşten Ayrılan Personel Sayısı</h5>
+                         <div class="metric-value d-inline-block">
+                             <h1 class="mb-1 text-center">{{ request.session.PersonelsayisiPasifs }}</h1>
+                         </div>
+                     </div>
+                 </a>
+             </div>
+         </div>
+    </div>
+</div>
+
+
+
+{% endblock body %}

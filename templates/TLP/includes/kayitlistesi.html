@@ -1,0 +1,75 @@
+ <div class="container">
+        <div class="row border border-darken-1">
+            {% if DestekTalebiKayits %}
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">Ç. No</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-3 col-sm-2 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">Tarih</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-1 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">Ürün/Modül. Adı</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-3 col-sm-2 border-left border-darken-1 py-2 px-1  text-center d-none d-xl-block">Istek Türü</div>
+                <div class="col-7 col-xl-1 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center">Konu</div>
+                <div class="col-2 col-xl-1 col-lg-1 col-md-2 col-sm-3 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">Kurum</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-3 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">Birim</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-3 border-left border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">Yetkili</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-3 border-left border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">İletişim</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-3 border-left border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">Kullanıcı</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-3 border-left border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">Durumu</div>
+                <div class="col-2 col-xl-1 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center">Detay</div>
+        </div>
+
+            {% for DestekTalebiKayits in DestekTalebiKayits %}
+        <div class="row border border-darken-1 clearfix">
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block" value="{{ request.GET.Kelime }}">{{DestekTalebiKayits.id}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-1 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block"><a href="/TalepYonetimi/TLPkayitDetay/{{DestekTalebiKayits.id}}">{{DestekTalebiKayits.DestekTalebiBaslamaTarihi}}</a></div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-1 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block"><a href="/TalepYonetimi/TLPkayitDetay/{{DestekTalebiKayits.id}}">{{DestekTalebiKayits.DestekTalebiUygulama|safe}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-1 border-left border-darken-1 py-2 px-1 text-center d-none d-xl-block"><a href="/TalepYonetimi/TLPkayitDetay/{{DestekTalebiKayits.id}}">{{DestekTalebiKayits.DestekTalebiTuruAdi|safe}}</div>
+                <div class="col-7 col-xl-1 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center col-xs-8"><a href="/TalepYonetimi/TLPkayitDetay/{{DestekTalebiKayits.id}}">{{DestekTalebiKayits.DestekTalebiKonu|safe}}</div>
+                <div class="col-2 col-xl-1 col-lg-1 col-md-2 col-sm-3 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block"><a href="/TalepYonetimi/TLPkayitDetay/{{DestekTalebiKayits.id}}">{{DestekTalebiKayits.DestekTalebiKurum|safe}}</div>
+                <div class="col-2 col-xl-1 col-lg-1 col-md-2 col-sm-3 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block"><a href="/TalepYonetimi/TLPkayitDetay/{{DestekTalebiKayits.id}}">{{DestekTalebiKayits.DestekTalebiBirim|safe}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-3 border-left border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block"><a href="/TalepYonetimi/TLPkayitDetay/{{DestekTalebiKayits.id}}">{{DestekTalebiKayits.DestekTalebiKisi|safe}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-3 border-left border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block"><a href="/TalepYonetimi/TLPkayitDetay/{{DestekTalebiKayits.id}}">{{DestekTalebiKayits.DestekTalebiKisiTelefon|safe}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-3 border-left border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block"><a href="/TalepYonetimi/TLPkayitDetay/{{DestekTalebiKayits.id}}">{{DestekTalebiKayits.DestekTalebiUser|safe}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-3 border-left border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block"><a href="/TalepYonetimi/TLPkayitDetay/{{DestekTalebiKayits.id}}">{{DestekTalebiKayits.DestekTalebiDurumu|safe}}  {{ DestekTalebiKayits.DestekTalebiTfsId|default:"" }}</div>
+                <div class="col-2 col-xl-1 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center col-xs-2">
+
+                {% if request.user.is_superuser == True %}
+                    <a href="/TalepYonetimi/TLPkayitDetay/{{DestekTalebiKayits.id}}" class="btn btn-primary py-2 px-2 white mr-2">Detay islem</a>
+                {% else %}
+                    <a href="/TalepYonetimi/TLPkayitDetay/{{DestekTalebiKayits.id}}" class="btn btn-danger py-2 px-2 white mr-2">Detayı Gör</a>
+                {% endif %}
+
+                </div>
+        </div>
+
+            {% endfor %}
+
+                {% for contact in contacts %}
+                    {# Each "contact" is a Contact model object. #}
+                    {{ contact.full_name|upper }}<br>
+                    ...
+                {% endfor %}
+
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if DestekTalebiKayits.has_previous %}
+                            <a href="?Sayfa=1{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">&laquo; ilk Sayfa</a>
+                            <a href="?Sayfa={{ DestekTalebiKayits.previous_page_number }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">Bir Önceki</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Toplam {{ DestekTalebiKayits.paginator.num_pages }} Sayfadan  {{ DestekTalebiKayits.number }} . Sayfa
+                        </span>
+
+                        {% if DestekTalebiKayits.has_next %}
+                            <a href="?Sayfa={{ DestekTalebiKayits.next_page_number }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">Bir Sonraki</a>
+                            <a href="?Sayfa={{ DestekTalebiKayits.paginator.num_pages }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">En son &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+
+                    <!-- ============================================================== -->
+                    <!-- end data table rowgroup  -->
+            {% else %}
+                <div class="alert alert-danger">
+                    Henüz Bilgi Girişi Yapılmamış...
+                </div>
+            {% endif %}
+    </div>

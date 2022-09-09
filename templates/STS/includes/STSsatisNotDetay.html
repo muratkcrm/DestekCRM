@@ -1,0 +1,63 @@
+{% load crispy_forms_tags %}
+
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <!-- Post Content Column -->
+        <div class="col-12 pt-3 m-auto">
+          <!-- Title -->
+
+
+
+   {% if satisGorusmesi %}
+            {% for satisGorusmesi in satisNotlar %}
+            <form method="post">
+            {% csrf_token %}
+
+                    <!-- timeline  -->
+                    <!-- ============================================================== -->
+
+                    <section class="cd-timeline js-cd-timeline">
+                        <div class="cd-timeline__container">
+                            <div class="cd-timeline__block js-cd-block">
+                                <div class="cd-timeline__img cd-timeline__img--picture js-cd-img">
+                                </div>
+                                <!-- cd-timeline__img -->
+                                <div class="cd-timeline__content js-cd-content">
+                                    <h3>{{ satisGorusmesi.satisNotlarKonu }}</h3>
+                                    <p>{{ satisGorusmesi.satisMetin|safe }}</p>
+                                    <span class="cd-timeline__date">{{ satisGorusmesi.satisOlusturmaTarihi }} / {{ satisGorusmesi.satisNotUser }}</span>
+                                {% if satisGorusmesi.satisNotDosya  %}
+                                    <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Not a Sözleşme Dosya  :</strong> </div>
+                                    <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1"></div>
+                                    <img class="img-responsive" style="max-width: 250px; max-height: 200px" src="{{ satisGorusmesi.satisNotDosya.url }}">
+                                {% endif %}
+                                </div>
+
+                                <!-- cd-timeline__content -->
+                            </div>
+                            <!-- cd-timeline__block -->
+
+                        </div>
+                    </section>
+                    <!-- cd-timeline -->
+
+                  <!-- ============================================================== -->
+                    <!-- end timeline  -->
+
+            </form>
+
+            {% endfor %}
+
+    </div>
+{% else %}
+
+<div class="alert alert-danger">
+    Henüz Bilgi Girişi Yapılmamış...
+</div>
+{% endif %}
+
+
+          <hr>
+        </div>
+      </div>

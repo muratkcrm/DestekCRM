@@ -1,0 +1,42 @@
+{% extends "STS/layout3.html" %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="text-center">Duyuru İşlemleri</h2>
+        <a style="float: right;" class="btn btn-success py-2 px-4 white mr-2 " href="/Satis/STSduyuruekle">Duyuru Ekle</a>
+        <br>
+        <hr>
+    </div>
+    {% if Duyurulars %}
+    <div class="container">
+        <div class="row border border-darken-1">
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">D. No</div>
+            <div class="col-7 col-md-7 border-left border-darken-1 py-2">Duyuru Başlığı</div>
+            <div class="col-2 border-left border-darken-1 py-2 d-none d-sm-block">Duyuru Tarihi</div>
+            <div class="col-2 border-left border-darken-1 py-2 text-center">Detay</div>
+        </div>
+        <div class="row border border-darken-1">
+            {% for duyurular in Duyurulars %}
+
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">{{duyurular.id}}</div>
+            <div class="col-7 col-md-7 border-left border-darken-1 py-2">{{duyurular.DuyuruBaslik|safe}}</div>
+            <div class="col-2 border-left border-darken-1 py-2 d-none d-sm-block">{{duyurular.DuyuruTarihi}}</div>
+            <div class="col-2 border-left border-darken-1 my-2 text-center ">
+                {% if request.user.is_superuser == True or perms.Satis.change_satisduyurular %}
+                    <a href="/Satis/STSduyurudetay/{{duyurular.id}}" class="btn btn-primary">Detay İşlem</a>
+                {% else %}
+                    <a href="/Satis/STSduyurudetay/{{duyurular.id}}" class="btn btn-danger">Detay Gör</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% else %}
+
+<div class="alert alert-danger">
+    Henüz Bilgi Girişi Yapılmamış...
+</div>
+{% endif %}
+
+{% endblock body %}

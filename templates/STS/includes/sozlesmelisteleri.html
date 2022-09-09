@@ -1,0 +1,54 @@
+
+    <div class="container">
+        <div class="row border border-darken-1">
+            {% if STSsozlesmelerimiz %}
+                <div class="col-2 col-xl-1 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">S. No</div>
+                <div class="col-2 col-xl-3 col-lg-3 col-md-6 col-sm-6 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">Kurum</div>
+                <div class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">Konu</div>
+                <div class="col-1 col-xl-2 col-lg-2 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">Başlangıç Tarihi</div>
+                <div class="col-1 col-xl-2 col-lg-2 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">Bitiş Tarihi</div>
+                <div class="col-1 col-xl-1 col-lg-1 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">Durumu</div>
+                <div class="col-2 col-xl-1 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center">Detay</div>
+        </div>
+
+            {% for STSsozlesmelerimiz in STSsozlesmelerimiz %}
+        <div class="row border border-darken-1 clearfix">
+                <div class="col-2 col-xl-1 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">{{STSsozlesmelerimiz.id}}</div>
+                <div class="col-2 col-xl-3 col-lg-3 col-md-6 col-sm-4 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">{{STSsozlesmelerimiz.SozlesmeKurum}}</div>
+                <div class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">{{STSsozlesmelerimiz.SozlesmeKonusu|safe|truncatewords:10}}</div>
+                <div class="col-1 col-xl-2 col-lg-2 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">{{STSsozlesmelerimiz.SozlesmeBaslangicTarihi|safe}}</div>
+                <div class="col-1 col-xl-2 col-lg-2 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">{{STSsozlesmelerimiz.SozlesmeBitisTarihi|safe}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">{{STSsozlesmelerimiz.SozlesmeDurumu|safe}}</div>
+                <div class="col-2 col-xl-1 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center">
+                    <a href="/Satis/STSsozlesmedetay/{{STSsozlesmelerimiz.id}}" class="btn btn-primary py-2 px-2 white mr-2">Detay</a>
+                </div>
+        </div>
+
+            {% endfor %}
+
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if STSsozlesmelerimiz.has_previous %}
+                            <a href="?Sayfa=1{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">&laquo; ilk Sayfa</a>
+                            <a href="?Sayfa={{ STSsozlesmelerimiz.previous_page_number }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">Bir Önceki</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Toplam {{ STSsozlesmelerimiz.paginator.num_pages }} Sayfadan  {{ STSgorusmelers.number }} . Sayfa
+                        </span>
+
+                        {% if STSgorusmelers.has_next %}
+                            <a href="?Sayfa={{ STSsozlesmelerimiz.next_page_number }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">Bir Sonraki</a>
+                            <a href="?Sayfa={{ STSsozlesmelerimiz.paginator.num_pages }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">En son &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+
+                    <!-- ============================================================== -->
+                    <!-- end data table rowgroup  -->
+            {% else %}
+                <div class="alert alert-danger">
+                    Henüz Bilgi Girişi Yapılmamış...
+                </div>
+            {% endif %}
+</div>

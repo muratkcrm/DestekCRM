@@ -1,0 +1,70 @@
+{% extends "TLP/layout2.html" %}
+
+{% block body %}
+
+    <div class="container">
+        <h3 class="text-center">Birim Tanımlama İşlemleri</h3>
+        {% if perms.TalepYonetimi.add_kurumbirimi %}
+            <a style="float: right;" class="btn btn-success py-2 px-4 white mr-2 "
+               href="/TalepYonetimi/TLPkurumBirimiEkle">Birim Ekle</a>
+        {% endif %}
+        <br>
+        <hr>
+    </div>
+    {% if KurumBirimis %}
+        <div class="container">
+            <div class="row border border-darken-1">
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">id</div>
+                <div class="col-4 col-md-4 border-left border-darken-1 py-2 text-center d-none d-sm-block">Kurum Adi
+                </div>
+                <div class="col-5 col-md-5 border-left border-darken-1 py-2 text-center">Birim Adı</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center">Detay</div>
+            </div>
+
+            {% for KurumBirimi in KurumBirimis %}
+
+                <div class="row border border-darken-1">
+                    <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">{{ KurumBirimi.id }}</div>
+                    <div class="col-4 col-md-4 border-left border-darken-1 py-2 d-none d-sm-block">{{ KurumBirimi.KurumAdi }}</div>
+                    <div class="col-5 col-md-5 border-left border-darken-1 py-2">{{ KurumBirimi.BirimAdi }}</div>
+                    <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center">
+                        {% if perms.TalepYonetimi.view_kurumbirimi %}
+                            <a href="/TalepYonetimi/TLPkurumBirimiDetay/{{ KurumBirimi.id }}" class="btn btn-primary">Detay</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+            {% endfor %}
+        </div>
+        <div class="pagination">
+                    <span class="step-links">
+                        {% if KurumBirimis.has_previous %}
+                            <a href="?Sayfa=1{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">&laquo; ilk Sayfa</a>
+                            <a href="?Sayfa=
+                                    {{ KurumBirimis.previous_page_number }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">Bir Önceki</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Toplam {{ KurumBirimis.paginator.num_pages }} Sayfadan  {{ KurumBirimis.number }} . Sayfa
+                        </span>
+
+                        {% if KurumBirimis.has_next %}
+                            <a href="?Sayfa=
+                                    {{ KurumBirimis.next_page_number }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">Bir Sonraki</a>
+                            <a href="?Sayfa=
+                                    {{ KurumBirimis.paginator.num_pages }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">En son &raquo;</a>
+                        {% endif %}
+                    </span>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end data table rowgroup  -->
+
+    {% else %}
+
+        <div class="alert alert-danger">
+            Henüz Bilgi Girişi Yapılmamış...
+        </div>
+    {% endif %}
+
+{% endblock body %}

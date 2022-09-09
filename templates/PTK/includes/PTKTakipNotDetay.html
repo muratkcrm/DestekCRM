@@ -1,0 +1,39 @@
+{% load crispy_forms_tags %}
+
+   <div class="container">
+       <div class="row">
+           <div class="col-12 pt-3 m-auto">
+
+   {% if PersonelKayitNot %}
+       {% for PersonelKayitNots in PersonelKayitNot %}
+            <form method="post">
+            {% csrf_token %}
+                <section class="cd-timeline js-cd-timeline">
+                    <div class="cd-timeline__container">
+                        <div class="cd-timeline__block js-cd-block">
+                            <div class="cd-timeline__img cd-timeline__img--picture js-cd-img">
+                            </div>
+                            <!-- cd-timeline__img -->
+                            <div class="cd-timeline__content js-cd-content">
+                                <h3>{{ PersonelKayitNots.PerTakipNotlarKonu }}</h3>
+                                <p>{{ PersonelKayitNots.PerTakipMetin|safe }}</p>
+                                <span class="cd-timeline__date">{{ PersonelKayitNots.PerTakipOlusturmaTarihi }} / {{ PersonelKayitNots.PerTakipNotUser }}</span>
+                                {% if PersonelKayitNots.PerTakipNotDosya  %}
+                                    <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Not'a Eklenen Dosya</strong> </div>
+                                    <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1"></div>
+                                    <a href="{{ PersonelKayitNots.PerTakipNotDosya.url }}"><img class="img-responsive" style="max-width: 250px; max-height: 200px" src="{{ PersonelKayitNots.PerTakipNotDosya.url }}"></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </form>
+       {% endfor %}
+       </div>
+   {% else %}
+       <div class="alert alert-danger">
+           Henüz Bilgi Girişi Yapılmamış...
+       </div>
+   {% endif %}
+       </div>
+   </div>

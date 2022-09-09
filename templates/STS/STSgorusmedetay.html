@@ -1,0 +1,65 @@
+{% extends "STS/layout3.html" %}
+
+{% block body %}
+    {% load crispy_forms_tags %}
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+          <!-- Post Content -->
+           <form method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+
+      <div class="row">
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Kayıt No: </strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ satisGorusmesi.id}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Kayıt Tarihi: </strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ satisGorusmesi.SatisBaslamaTarihi}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Uygulama Adı: </strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ satisGorusmesi.SatisUygulama}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Kurum Adı:</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ satisGorusmesi.SatisKurum|safe}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Yetkili:</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ satisGorusmesi.SatisGorusulenKisi|safe}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Cagri Durumu:</strong> </div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ satisGorusmesi.SatisDurumu|safe}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Konu:</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-93 float-left py-1">{{ satisGorusmesi.SatisKonu|safe }}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Aciklama:</strong> </div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ satisGorusmesi.SatisAciklama|safe}}</div>
+            {% if satisGorusmesi.SatisDosyasi  %}
+                <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>görüşme Dosyası  :</strong> </div>
+                <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1"></div>
+                <img class="img-responsive" style="max-width: 250px; max-height: 200px" src="{{ satisGorusmesi.SatisDosyasi.url }}">
+            {% endif %}
+      </div>
+
+            {% if request.user == satisGorusmesi.SatisUser or request.user.is_superuser == True or perms.Satis.change_satisgorusmesi%}
+            <div class="col-12 pt-3">
+            <a href="/Satis/STSgorusmeguncelle/{{satisGorusmesi.id}}" class="btn btn-primary">Güncelle</a>
+            {% endif %}
+           {% if perms.Satis.add_stssatisnotlar %}
+            <a href="/Satis/STSsatisNotEkle/{{satisGorusmesi.id}}" class="btn btn-success">Not Ekle</a>
+           {% endif %}
+           {% if perms.Satis.view_satisgorusmesi %}
+            <a href="/Satis/STSgorusmeler" class="btn btn-danger py-2 px-4 white mr-2 " >Kayit Aramaya Git</a>
+           {% endif %}
+            </div>
+            </form>
+
+            {% if satisNotlar %}
+            {% include "STS/includes/STSsatisNotDetay.html" %}
+            {% else %}
+            {{ "Kayıt ilişkin NOT Bulunmamaktadır......" }}
+            {% endif %}
+
+
+      </div>
+    </div>
+
+
+
+
+
+{% endblock body %}

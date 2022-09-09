@@ -1,0 +1,27 @@
+{% extends "PTK/layout60.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h3>Parola Değiştir</h3>
+        <hr>
+        <form method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.media}}
+            {{form|crispy}}
+
+            <!--  {{form.as_p}} -->
+            <br>
+            <div class="action-buttons mt-2 text-center ">
+                <hr style="margin-right:12%">
+                <button type="submit" class="btn btn-primary py-2 px-4 white mr-2 ">Parola Guncelle</button>
+                <a class="btn btn-danger py-2 px-4 white mr-2 " href="PerTakip/PTKindex">Anasayfaya Git</a>
+                <hr style="margin-right:12%">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock body %}

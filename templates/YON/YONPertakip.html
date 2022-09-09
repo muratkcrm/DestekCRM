@@ -1,0 +1,49 @@
+{% extends "YON/layout4.html" %}
+
+{% block body %}
+
+    <div class="container">
+        <h3 class="text-center">Silinen Personel Kayıtları</h3>
+        <hr>
+    </div>
+        {% if PersonelKayits %}
+        <div class="row border border-darken-1">
+
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Kayıt No</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-lg-block">T.C.Kimlik No</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-lg-block">Personel Adı</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Personel Soyadı</div>
+                <div class="col-1 col-xl-2 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Personel Adres</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Personel İlçe/İl</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Personel Telefon</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Personel Durumu</div>
+                <div class="col-2 col-xl-2 col-lg-1 col-md-2 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Personel Firma</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center">Detay</div>
+        </div>
+        {% for PersonelKayit in PersonelKayits %}
+        <div class="row border border-darken-1 clearfix">
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block" value="{{ request.GET.Kelime }}">{{PersonelKayit.id}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">{{PersonelKayit.PTKTckimlik }}</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">{{PersonelKayit.PTKAdi| truncatechars:"10"|safe}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">{{PersonelKayit.PTKSoyadi|safe}}</div>
+                <div class="col-1 col-xl-2 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-1 px-1 text-center d-none d-xl-block">{{PersonelKayit.PTKAdres|safe}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-1 px-1 text-center d-none d-xl-block">{{PersonelKayit.PTKIlce|safe}} - {{PersonelKayit.PTKIl|safe}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-1 px-1 text-center d-none d-xl-block">{{PersonelKayit.PTKTelefon|safe}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-lg-block">{{PersonelKayit.PTKDurumu|safe }} </div>
+                <div class="col-2 col-xl-2 col-lg-1 col-md-2 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">{{PersonelKayit.PTKFirmaAdi|safe}} </div>
+
+                <div class="col-1 col-md-1 border-left border-darken-1 py-1 text-center">
+                    <a href="/Yonetim/YONPertakipGuncelle/{{PersonelKayit.id}}" class="btn btn-danger py-1 px-4 white mr-1">Geri Al</a>
+                </div>
+        </div>
+            {% endfor %}
+
+    </div>
+{% else %}
+
+<div class="alert alert-danger">
+    Silinen Kayıt Kalmadı...
+</div>
+{% endif %}
+
+{% endblock body %}

@@ -1,0 +1,52 @@
+{% extends "STS/layout3.html" %}
+
+{% block body %}
+    {% load crispy_forms_tags %}
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+          <!-- Post Content -->
+           <form method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+
+      <div class="row">
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Takip No: </strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ STSsozlesmedetay.id}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Sözleşme Durumu</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ STSsozlesmedetay.SozlesmeDurumu|safe}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Başlangıç Tarihi</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ STSsozlesmedetay.SozlesmeBaslangicTarihi|safe}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Bitiş Tarihi</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ STSsozlesmedetay.SozlesmeBitisTarihi|safe}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Kurum</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ STSsozlesmedetay.SozlesmeKurum|safe}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Konu </strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ STSsozlesmedetay.SozlesmeKonusu|safe}}</div>
+       </div>
+
+            {% if request.user == STSgorusmedetay.SozlesmeUser or request.user.is_superuser == True or perms.Satis.change_satissozlesmeler %}
+            <div class="col-12 pt-3">
+            <a href="/Satis/STSsozlesmeguncelle/{{STSsozlesmedetay.id}}" class="btn btn-primary">Güncelle</a>
+            {% endif %}
+            <a href="/Satis/STSsozlesmelerimiz/" class="btn btn-danger py-2 px-4 white mr-2">Kayit Aramaya Git</a>
+            </div>
+            </form>
+            {% if perms.Satis.view_stssatisnotlar %}
+            {% if cagriNot %}
+            {% include "STS/includes/STSsatisNotDetay.html" %}
+            {% else %}
+            {{ "Kayıt ilişkin NOT Bulunmamaktadır......" }}
+            {% endif %}
+            {% endif %}
+
+
+      </div>
+    </div>
+
+
+
+
+
+{% endblock body %}

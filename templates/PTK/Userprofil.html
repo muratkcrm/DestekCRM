@@ -1,0 +1,29 @@
+{% extends "PTK/layout60.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-md-8 m-auto">
+        <div class="col-lg-5"><h2 class="page-header">Profil Guncelle</h2></div>
+        <h5><strong>KULLANICI ADI : </strong>{{ request.user.username }}</h5>
+
+        <hr>
+        <form method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.media}}
+            {{form|crispy}}
+
+            <!--  {{form.as_p}} -->
+            <br>
+            <div class="action-buttons text-center">
+                <hr style="margin-right:12%">
+                <button type="submit" class="btn btn-primary py-2 px-4 white mr-2 ">Profil Guncelle</button>
+                <a class="btn btn-danger py-2 px-4 white mr-2 " href="/PerTakip/PTKindex">Anasayfaya Git</a>
+                <hr style="margin-right:12%">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock body %}

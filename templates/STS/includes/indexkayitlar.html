@@ -1,0 +1,33 @@
+{% load crispy_forms_tags %}
+<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 float-left border-right clearfix">
+    Son 10 Kayıt
+
+    <marquee class="float-left border-3 border-top border-top-primary mt-2" id='kayit' scrollamount="4" height="250" direction="up">
+        <div onMouseOver="document.getElementById('kayit').stop();" onMouseOut="document.getElementById('kayit').start();">
+            {% if CagriKayits %}
+                {% for CagriKayit in CagriKayits %}
+                    <a href="/Satis/STSgorusmedetay/{{ CagriKayit.id }}">
+                        <div style="box-shadow: 3px 3px 3px #ccc">
+                            <div class="card">
+                                <h3 class="card-header py-0">{{ CagriKayit.id }} - {{ CagriKayit.SatisKonu }}</h3>
+                                <div class="card-body py-0">
+                                    <div class="media py-0">
+                                        <div class="media-body top-0 pb-2 ">
+                                            <h6 class="py-0">{{ CagriKayit.SatisBaslamaTarihi}} - {{ CagriKayit.SatisAcanKullanici }}</h6>
+                                            {{CagriKayit.SatisAciklama|safe|truncatewords:50}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-danger">
+                       Henüz Duyuru Yayınlanmamış
+                </div>
+            {% endif %}
+
+        </div>
+    </marquee>
+</div>

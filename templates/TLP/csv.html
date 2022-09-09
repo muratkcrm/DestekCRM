@@ -1,0 +1,8 @@
+{% extends "TLP/layout2.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<a href="{% url 'export_csv' %}">Export all users</a>
+
+{% endblock body %}

@@ -1,0 +1,40 @@
+{% extends "YON/layout4.html" %}
+
+{% block body %}
+
+    <div class="container">
+        <h3 class="text-center">Kurum Tanımlama İşlemleri</h3>
+        <hr>
+    </div>
+    {% if Kurumlars %}
+    <div class="container">
+        <div class="row border border-darken-1">
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">K. No</div>
+                <div class="col-4 col-md-4 border-left border-darken-1 py-2 text-center">Kurum Adı</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center d-none d-sm-block">Kurum İli</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center ">Aktiflik</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center ">Detay</div>
+        </div>
+
+            {% for Kurumlar in Kurumlars %}
+
+        <div class="row border border-darken-1">
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">{{Kurumlar.id}}</div>
+                <div class="col-4 col-md-4 border-left border-darken-1 py-2">{{Kurumlar.KurumAdi}}</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 d-none d-sm-block">{{Kurumlar.KurumIl}}</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 d-none d-sm-block">{{Kurumlar.KurumAktif}}</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center">
+                    <a href="/Yonetim/YONstskurumlarGuncelle/{{Kurumlar.id}}" class="btn btn-primary">Aktiflik</a>
+                </div>
+        </div>
+            {% endfor %}
+
+    </div>
+{% else %}
+
+<div class="alert alert-danger">
+    Silinen Kayıt Kalmadı...
+</div>
+{% endif %}
+
+{% endblock body %}

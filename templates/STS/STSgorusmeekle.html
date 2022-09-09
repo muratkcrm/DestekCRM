@@ -1,0 +1,34 @@
+{% extends "STS/layout3.html" %}
+
+{% block body %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-md-9 m-auto">
+        <h3>Satış Görümesi Ekle</h3>
+        <hr>
+        <form method="post" enctype="multipart/form-data" novalidate id = "author-form">
+            {% csrf_token %}
+            {{form.media}}
+            {{form|crispy}}
+
+            <!--  {{form.as_p}} -->
+            <br>
+            <div class="action-buttons mt-2 text-center ">
+                <hr style="margin-right:12%">
+                {% if perms.Satis.add_satisgorusmesi %}
+                <button type="submit" class="btn btn-success py-2 px-4 white mr-2 ">Görüşme Ekle</button>
+                {% endif %}
+                {% if perms.Satis.view_satisgorusmesi %}
+                <a class="btn btn-primary py-2 px-4 white mr-2 " href="/Satis/STSgorusmeler">Tüm Görüşmeler</a>
+                {% endif %}
+                <a class="btn btn-danger py-2 px-4 white mr-2 " href="/Satis/STSindex">AnaSayfa</a>
+                <hr style="margin-right:12%">
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock body %}

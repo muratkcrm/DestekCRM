@@ -1,0 +1,33 @@
+body{
+  background: #eee;
+}
+body a {
+  color:purple;
+}
+body a:hover {
+  color: red;
+  text-decoration: none;
+}
+
+.header{
+  width: 100%;
+  box-shadow: 5px 5px 5px #ccc;
+}
+.header .menu a{
+  margin: 0 1rem;
+  text-align: center;
+}
+.container{
+  box-shadow: 5px 5px 5px #ccc;
+  border-radius: 4px ;
+  padding: 20px;
+  color:#fff;
+}
+.row {
+  padding: 10px 20px;
+  text-align: center;
+}
+.col{
+  float: left;
+  height: 125px;
+}

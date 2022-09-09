@@ -1,0 +1,27 @@
+{% extends "TLP/layout2.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3" >
+        <h3>Kisi Ekle</h3>
+        <hr>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.media}}
+            {{form|crispy}}
+            <br>
+            <div class="action-buttons mt-2 text-center ">
+                <hr style="margin-right:12%">
+                {% if perms.TalepYonetimi.add_kisi %}
+                <button type="submit" class="btn btn-success py-2 px-4 white mr-2 ">Kisi Ekle</button>
+                {% endif %}
+                <a class="btn btn-danger py-2 px-4 white mr-2 " href="/TalepYonetimi/TLPkisi">Kisi Sayfasına Git</a>
+                <hr style="margin-right:12%">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,41 @@
+{% extends "YON/layout4.html" %}
+
+{% block body %}
+    <div class="container">
+        <h3 class="text-center">Talep Türü İşlemleri</h3>
+        <br>
+
+
+    </div>
+    {% if destekTalebis %}
+    <div class="container">
+        <div class="row border border-darken-1">
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">Tür No</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center d-none d-sm-block">Cagrı Adı</div>
+                <div class="col-5 col-md-5 col-sm-5 border-left border-darken-1 py-2 text-center">Açıklama</div>
+                <div class="col-2 col-md-2 col-sm-5 border-left border-darken-1 py-2 text-center">Aktiflik</div>
+                <div class="col-2 col-md-2 col-sm-3 border-left border-darken-1 py-2 text-center">Güncelle</div>
+        </div>
+
+            {% for destekTalebi in destekTalebis %}
+
+        <div class="row border border-darken-1">
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">{{destekTalebi.id}}</div>
+            <div class="col-2 col-md-2 border-left border-darken-1 py-2 d-none d-sm-block">{{destekTalebi.DestekTalebiAdi}}</div>
+            <div class="col-5 col-md-5 col-sm-5 border-left border-darken-1 py-2">{{destekTalebi.DestekTalebiAciklama|safe|truncatewords:1}}</div>
+            <div class="col-2 col-md-2 border-left border-darken-1 py-2 d-none d-sm-block">{{destekTalebi.DestekTalebiAktif}}</div>
+            <div class="col-2 col-md-2 col-sm-3 border-left border-darken-1 py-2 text-center">
+                <a href="/Yonetim/YONdestekTalebiTuruGuncelle/{{destekTalebi.id}}" class="btn btn-primary">Aktiflik</a>
+            </div>
+        </div>
+
+            {% endfor %}
+
+    </div>
+{% else %}
+<div class="alert alert-danger">
+    Silinen Kayıt Kalmadı...
+</div>
+{% endif %}
+
+{% endblock body %}

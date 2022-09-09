@@ -1,0 +1,21 @@
+{% extends "layoutGiris.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+        <form method="post" class="m-auto" id='demo-form'>
+        {% csrf_token %}
+        {{form|crispy}}
+        <!--  {{form.as_p}} -->
+        <br>
+        <div class="action-buttons text-center ">
+            <button type="submit" class="btn btn-danger py-2 btn-block px-4 white mr-2"
+                    >Giriş Yap</button>
+        </div>
+        </form>
+</div>
+
+
+{% endblock body %}
+

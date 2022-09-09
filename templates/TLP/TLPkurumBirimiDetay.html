@@ -1,0 +1,33 @@
+{% extends "TLP/layout2.html" %}
+
+{% block body %}
+    {% load crispy_forms_tags %}
+
+    <div class="container">
+            <h3>Birim Detayları</h3>
+            <hr>
+      <div class="row">
+
+            {% csrf_token %}
+
+            <div class="col-3 col-md-3 float-left py-1"><strong>Birim No</strong></div>
+               <div class="col-9 float-left py-1">{{kurumBirimi.id}}</div>
+            <div class="col-3 col-md-3 float-left py-1"><strong>Birim Adı</strong></div>
+               <div class="col-9 float-left py-1">{{kurumBirimi.BirimAdi}}</div>
+            <div class="col-3 col-md-3 float-left py-1"><strong>Bağlı Kurumu</strong></div>
+               <div class="col-9 float-left py-1">{{kurumBirimi.KurumAdi}}</div>
+            <div class="col-3 col-md-3 float-left py-1"><strong>Kurum Adresi</strong></div>
+               <div class="col-9 float-left py-1">{{kurumBirimi.BirimAdresi}}</div>
+            <div class="col-3 col-md-3 float-left py-1"><strong>Kurum Maili</strong></div>
+               <div class="col-9 float-left py-1">{{kurumBirimi.BirimEmail}}</div>
+            <div class="col-3 col-md-3 float-left py-1"><strong>Kurum Telefonu</strong></div>
+               <div class="col-9 float-left py-1">{{kurumBirimi.BirimTelefon}}</div>
+            <div class="col-3 col-md-3 float-left py-1"><strong>Kurum Yetkilis</strong> </div>
+               <div class="col-9 float-left pt-3">{{kurumBirimi.BirimYetkili}}</div>
+            {% if perms.TalepYonetimi.change_kurumbirimi %}
+            <a href="/TalepYonetimi/TLPkurumBirimiGuncelle/{{kurumBirimi.id}}" class="btn btn-primary">Güncelle</a>
+            {% endif %}
+            <a href="/TalepYonetimi/TLPkurumBirimi" class="btn btn-danger py-2 px-4 white mr-2 " >Tüm Kurumlar</a>
+            </div>
+      </div>
+{% endblock body %}

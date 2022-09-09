@@ -1,0 +1,48 @@
+{% extends "YON/layout4.html" %}
+
+
+{% block body %}
+
+    <div class="container">
+        <h3 class="text-center">Cari Hesap Geri Alma İşlemleri</h3>
+        <hr>
+    </div>
+    {% if CariHesaps %}
+    <div class="container">
+        <div class="row border border-darken-1">
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">Sıra</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">Cari Kodu</div>
+                <div class="col-3 col-md-3 border-left border-darken-1 py-2 text-center d-none d-sm-block">Cari Ünvanı</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center">Hesap Adı</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">Turu</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">Telefon</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">Adres</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center ">Detay</div>
+        </div>
+
+            {% for CariHesap in CariHesaps %}
+
+        <div class="row border border-darken-1">
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-left d-none d-sm-block">{{CariHesap.id}}</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-left d-none d-sm-block">{{CariHesap.CariKodu}}</div>
+                <div class="col-3 col-md-3 border-left border-darken-1 py-2 text-left d-none d-sm-block">{{CariHesap.CariUnvani}}</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2">{{CariHesap.CariAdi }} {{ CariHesap.CariSoyadi }}</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 d-none d-sm-block">{{CariHesap.CariDurumu}}</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 d-none d-sm-block">{{CariHesap.CariTelefon1}}-{{ CariHesap.CariCepTelefon }}</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 d-none d-sm-block">{{CariHesap.CariAdres}}</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center">
+                    <a href="/Yonetim/YONonmcarihesapGuncelle/{{CariHesap.id}}" class="btn btn-primary">Aktiflik</a>
+                </div>
+        </div>
+            {% endfor %}
+
+    </div>
+
+{% else %}
+
+<div class="alert alert-danger">
+    Silinen Kayıt Kalmadı...
+</div>
+{% endif %}
+
+{% endblock body %}

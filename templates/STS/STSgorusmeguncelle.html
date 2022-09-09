@@ -1,0 +1,36 @@
+{% extends "STS/layout3.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h3>Çağrı Kayıt Guncelle</h3>
+        <h5><strong>Kayıt Nosu : </strong>{{ request.session.gorusmeGuncelleID }}</h5>
+
+        <hr>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.media}}
+            {{form|crispy}}
+
+            <!--  {{form.as_p}} -->
+            <br>
+            <div class="action-buttons mt-2 text-center ">
+                <hr style="margin-right:12%">
+                {% if perms.Satis.change_satisgorusmesi %}
+                <button type="submit" class="btn btn-primary py-2 px-4 white mr-2 ">Çağrı Kaydını Guncelle</button>
+                {% endif %}
+                {% if perms.Satis.delete_satisgorusmesi %}
+                <a href="/Satis/STSgorusmesil/{{request.session.gorusmeGuncelleID}}" class="btn btn-danger">Sil</a>
+                {% endif %}
+                {% if perms.Satis.view_satisgorusmesi %}
+                <a class="btn btn-primary py-2 px-4 white mr-2 " href="/Satis/STSgorusmedetay/{{request.session.gorusmeGuncelleID}}">Görüşme Kaydına Git</a>
+                {% endif %}
+                <hr style="margin-right:12%">
+            </div>
+
+    </div>
+</div>
+
+{% endblock body %}

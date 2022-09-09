@@ -1,0 +1,32 @@
+{% extends "STS/layout3.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h3>Duyuruyu Guncelle</h3>
+        <hr>
+        <form method="post">
+            {% csrf_token %}
+            {{form.media}}
+            {{form|crispy}}
+            <!--  {{form.as_p}} -->
+            <br>
+            <div class="action-buttons mt-2 text-center ">
+                <hr style="margin-right:12%">
+                {% if perms.Satis.change_satisduyurular %}
+                <button type="submit" class="btn btn-primary py-2 px-4 white mr-2 ">Guncelle</button>
+                {% endif %}
+                {% if perms.Satis.view_satisduyurular %}
+                <a class="btn btn-danger py-2 px-4 white mr-2 " href="/Satis/STSduyurular">Tüm Duyurular</a>
+                {% endif %}
+                {% if perms.Satis.delete_satisduyurular %}
+                <a href="/Satis/STSduyurusil/{{request.session.duyuruGuncelleID}}" class="btn btn-danger py-2 px-4 white mr-2">Sil</a>
+                {% endif %}
+                <hr style="margin-right:12%">
+            </div>
+    </div>
+</div>
+
+{% endblock body %}

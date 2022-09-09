@@ -1,0 +1,45 @@
+{% extends "TLP/layout2.html" %}
+
+{% load static %}
+{% block ust_icerik %}
+{% endblock ust_icerik %}
+
+{% block body %}
+
+{% load crispy_forms_tags %}
+<div class="row">
+    <div class="col-md-9 m-auto">
+
+        <h3>Istek Kayıt Ekle</h3>
+        <hr>
+        <form method="post" enctype="multipart/form-data" novalidate id = "author-form">
+            {% csrf_token %}
+            <table border="1">
+                {{form.media}}
+                {{form|crispy}}
+                <!--  {{form.as_p}} -->
+            </table>
+            <br>
+            <div class="action-buttons mt-2 text-center ">
+                <hr style="margin-right:12%">
+                {% if perms.TalepYonetimi.add_destektalebikayit %}
+                    <button type="submit" class="btn btn-success py-2 px-4 white mr-2 ">Istek Kaydı Ekle</button>
+                {% endif %}
+                {% if perms.TalepYonetimi.add_kisi %}
+                    <a class="btn btn-primary py-2 px-4 white mr-2 " href="/TalepYonetimi/TLPkisi">Kişi Eklemeye Git</a>
+                {% endif %}
+                {% if perms.TalepYonetimi.view_destektalebikayit %}
+                    <a class="btn btn-primary py-2 px-4 white mr-2 " href="/TalepYonetimi/TLPkayitacik">Kayit Arama Git</a>
+                {% endif %}
+                <a class="btn btn-danger py-2 px-4 white mr-2 " href="/TalepYonetimi/TLPindex">AnaSayfa Git</a>
+                <hr style="margin-right:12%">
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+{% endblock body %}
+
+

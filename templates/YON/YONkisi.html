@@ -1,0 +1,44 @@
+{% extends "YON/layout4.html" %}
+
+{% block body %}
+
+    <div class="container">
+        <h3 class="text-center">Kişi Tanımlama</h3>
+
+        <hr>
+    </div>
+    {% if kisis %}
+    <div class="container">
+        <div class="row border border-darken-1">
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">No</div>
+            <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center d-none d-sm-block">Adı ve Soyadı</div>
+            <div class="col-3 col-md-3 border-left border-darken-1 py-2 text-center d-none d-sm-block">Kurum Adı</div>
+            <div class="col-3 col-md-3 border-left border-darken-1 py-2 text-center d-none d-sm-block">Kurum Birimi</div>
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">Aktiflik</div>
+            <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center d-none d-sm-block">Detay</div>
+        </div>
+
+            {% for kisis in kisis %}
+
+        <div class="row border border-darken-1">
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">{{kisis.id}}</div>
+            <div class="col-2 col-md-2 border-left border-darken-1 py-2 d-none d-sm-block">{{kisis.KisiAdiSoyadi}}</div>
+            <div class="col-3 col-md-3 border-left border-darken-1 py-2 d-none d-sm-block">{{kisis.KurumAdi}}</div>
+            <div class="col-3 col-md-3 border-left border-darken-1 py-2 d-none d-sm-block">{{kisis.KisiBirimAdi}}</div>
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 d-none d-sm-block">{{kisis.KisiAktif}}</div>
+            <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center d-none d-sm-block">
+                <a href="/Yonetim/YONkisiGuncelle/{{kisis.id}}" class="btn btn-primary">Aktiflik</a>
+            </div>
+        </div>
+
+            {% endfor %}
+    </div>
+
+{% else %}
+
+<div class="alert alert-danger">
+    Silinen Kayıt Kalmadı...
+</div>
+{% endif %}
+
+{% endblock body %}

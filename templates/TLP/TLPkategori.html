@@ -1,0 +1,46 @@
+{% extends "TLP/layout2.html" %}
+
+{% block body %}
+    <div class="container">
+        <h3 class="text-center">Kategori İşlemleri</h3>
+        {% if perms.TalepYonetim.add_destektalebituru %}
+        <a style="float: right;" class="btn btn-success py-2 px-4 white mr-2 " href="/TalepYonetimi/TLPkategoriEkle">Kategori Ekle</a>
+        {% endif %}
+        <br>
+        <hr>
+    </div>
+    {% if Kategoris %}
+    <div class="container">
+        <div class="row border border-darken-1">
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">K. No</div>
+            <div class="col-3 col-md-3 border-left border-darken-1 py-2 text-center d-none d-sm-block">Kategori Adı</div>
+            <div class="col-6 col-md-6 col-sm-5 border-left border-darken-1 py-2 text-center">Açıklama</div>
+            {% if perms.TalepYonetim.change_destektalebituru %}
+            <div class="col-2 col-md-2 col-sm-3 border-left border-darken-1 py-2 text-center">Güncelle</div>
+            {% endif %}
+        </div>
+
+            {% for Kategori in Kategoris %}
+
+        <div class="row border border-darken-1">
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">{{Kategori.id}}</div>
+            <div class="col-3 col-md-3 border-left border-darken-1 py-2 d-none d-sm-block">{{Kategori.KategoriAdi}}</div>
+            <div class="col-6 col-md-6 col-sm-5 border-left border-darken-1 py-2">{{Kategori.KategoriAciklama|truncatewords:1}}</div>
+            <div class="col-2 col-md-2 col-sm-3 border-left border-darken-1 py-2 text-center">
+            {% if perms.TalepYonetimi.change_kategori %}
+                <a href="/TalepYonetimi/TLPkategoriGuncelle/{{Kategori.id}}" class="btn btn-primary">Güncelle</a>
+            {% endif %}
+            </div>
+        </div>
+
+            {% endfor %}
+
+    </div>
+{% else %}
+
+<div class="alert alert-danger">
+    Henüz Bilgi Girişi Yapılmamış...
+</div>
+{% endif %}
+
+{% endblock body %}

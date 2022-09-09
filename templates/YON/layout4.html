@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="tr" class="loading">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../../static/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="../../../static/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../static/assets/libs/css/style.css">
+    <link rel="stylesheet" href="../../../static/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="stylesheet" href="../../../static/assets/vendor/charts/chartist-bundle/chartist.css">
+    <link rel="stylesheet" href="../../../static/assets/vendor/charts/morris-bundle/morris.css">
+    <link rel="stylesheet"
+          href="../../../static/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../../static/assets/vendor/charts/c3charts/c3.css">
+    <link rel="stylesheet" href="../../../static/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <link rel="shortcut icon" type="image/png" href="../../../static/assets/img/favicon.png"/>
+    <title>FASTSOFT</title>
+    {% block ust_icerik %}
+    {% endblock ust_icerik %}
+</head>
+
+<body>
+{% if perms.auth %}
+   <!-- ============================================================== -->
+    <!-- main wrapper -->
+    <!-- ============================================================== -->
+    <div class="dashboard-main-wrapper">
+        <!-- ============================================================== -->
+
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- left sidebar -->
+        <!-- ============================================================== -->
+        <div class="nav-left-sidebar sidebar-dark">
+            <div class="menu-list">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="d-xl-none d-lg-none" href="#"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-divider">
+                                Merhaba {{ request.user.first_name }} {{ request.user.last_name }}
+                                {% now "j F Y H:i" %}
+                            </li>
+                            {% if request.user.is_superuser == True or perms.auth %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-15" aria-controls="submenu-15"><i class="fas fa-cog mr-2"></i>Talep Takip Tanımlama</a>
+                                    <div id="submenu-15" class="collapse submenu" style="">
+                                        <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="{% url 'Yonetim:YONkurumlar' %}">Kurum tanımlama</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="{% url 'Yonetim:YONkurumBirimi' %}">Birim Tanımlama</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="{% url 'Yonetim:YONuygulama' %}">Uygulama Tanımlama</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="{% url 'Yonetim:YONdestekTalebiTuru' %}">Talep Türü Tanımlama</a>
+                                                    </li>
+                                                         <li class="nav-item">
+                                                        <a class="nav-link" href="{% url 'Yonetim:YONkategori' %}">Kategori Tanımlama</a>
+                                                    </li>
+                                                    <!--<li class="nav-item">
+                                                        <a class="nav-link" href="{% url 'Yonetim:YONkisi' %}">Kisi Tanımlama</a>
+                                                    </li>-->
+                                        </div>
+                                    </li>
+                                </li>
+                                <li class="nav-item ">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true" data-target="#submenu-21" aria-controls="submenu-21"><i class="fab fa-fw fa-wpforms"></i>Satış Tanımlamalar<span class="badge badge-success"></span></a>
+                                <div id="submenu-21" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'Yonetim:YONstskurumlar' %}">Kurum tanımlama</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'Yonetim:YONstsuygulama' %}">Uygulama Tanımlama</a>
+                                            </li>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true" data-target="#submenu-31" aria-controls="submenu-31"><i class="fab fa-fw fa-wpforms"></i>Personel Tanımlamalar<span class="badge badge-success"></span></a>
+                                <div id="submenu-31" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'Yonetim:YONPertakip' %}">Personel tanımlama</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                              {% if request.user.is_superuser == True %}
+                               <a class="nav-link" href="/Yonetim/YONregister/" ><i class="fas fa-fw fa-user-circle"></i>Kullanıcı İşlemleri</a>
+                              {% endif %}
+         <!--                  <a class="nav-link" href="/Yonetim/YONregister/" ><i class="fas fa-fw fa-user-circle"></i>Kullanıcı Yetkilendirme</a>
+          -->                  <a class="nav-link" href="/Yonetim/YONUserPasswordChange/" ><i class="fas fa-fw fa-user-circle"></i>Şifre Değişikliği</a>
+                            {% endif %}
+
+                            <a class="nav-link" href="/" ><i class="fas fa-exchange-alt"></i>Uygulama Değiştir</a>
+
+                            <a class="nav-link" href="/user/logout/" ><i class="fa fa-fw fa-power-off"></i>Çıkış</a>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end left sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- wrapper  -->
+        <!-- ============================================================== -->
+        <div class="dashboard-wrapper">
+
+		    {% include "YON/includes/navbar.html" %}
+            <div class="container bg-light my-3 py-3 px-4">
+                <!--  mesajların yazdırılması başlangıç -->
+                        {% if messages %}
+                        <ul class='message'>
+                            {% for message in messages %}
+                                {% if message.tags == "info" %}
+                                    <div class="alert alert-danger">{{ message }}</div>
+                                {% else %}
+                                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <!-- mesajların yazdırılması bitiş-->
+
+                {% block body %}
+
+                {% endblock body %}
+             </div>
+
+
+        {% include "footer.html" %}
+
+        </div>
+
+
+        <!-- ============================================================== -->
+        <!-- end wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- end main wrapper  -->
+    <!-- ============================================================== -->
+    <!-- Optional JavaScript -->
+
+    <!-- jquery 3.3.1 -->
+    <script src="../../../static/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <!-- bootstap bundle js -->
+    <script src="../../../static/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- slimscroll js -->
+    <script src="../../../static/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <!-- main js -->
+    <script src="../../../static/assets/libs/js/main-js.js"></script>
+    <!-- chart chartist js -->
+    <script src="../../../static/assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
+    <!-- sparkline js -->
+    <script src="../../../static/assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+    <!-- morris js -->
+    <script src="../../../static/assets/vendor/charts/morris-bundle/raphael.min.js"></script>
+    <script src="../../../static/assets/vendor/charts/morris-bundle/morris.js"></script>
+    <!-- chart c3 js -->
+{% else %}
+    <div><h1>Yetkiniz Yoktur..</h1></div>
+{% endif %}
+</body>
+
+</html>

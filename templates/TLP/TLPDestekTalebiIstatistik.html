@@ -1,0 +1,109 @@
+{% extends "TLP/layout2.html" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 border p-3 float-left" style="background: #dbffc2">
+            ({{ Aylikenddate }}-{{ Nbaslangic }}) Toplam : {{ DestekTalebiKayitlarAylikSayi }}
+            <div class="p-2 border-3 border-bottom border-secondary"><h4>30 günlük Gelen Çagrı</h4></div>
+            <!--<img src="data:image/png;base64,{{data}}" alt="" height="250", width="100%">-->
+            {% if DestekTalebiKayitlar %}
+                {% for kurumlars in kurumlars %}
+                    {% for DestekTalebiKayitlarAylik in DestekTalebiKayitlarAylik %}
+                        {% if kurumlars.id == DestekTalebiKayitlarAylik.DestekTalebiKurum %}
+                            <div class="col-10 py-2 float-left"><a href="/TalepYonetimi/TLPkurumlarDetay/{{kurumlars.id}}">{{kurumlars.KurumAdi}}</a></div>
+                            <div class="col-2 py-2 float-left">{{DestekTalebiKayitlarAylik.total}}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-danger">
+                    Henüz Kayıt Girilen Kurum Yoktur
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 border p-3 float-left" style="background: #ffd8d8">
+            ({{ Haftalikenddate }}-{{ Nbaslangic }}) Toplam : {{ DestekTalebiKayitlarHaftaliksayi }}
+            <div class="p-2 border-3 border-bottom border-secondary"><h4>7 günlük Gelen Çağrı</h4></div>
+            <!--<img src="data:image/png;base64,{{data}}" alt="" height="250", width="100%">-->
+            {% if DestekTalebiKayitlar %}
+                {% for Nkurumlars in Nkurumlars %}
+                    {% for DestekTalebiKayitlarHaftalik in DestekTalebiKayitlarHaftalik %}
+                        {% if Nkurumlars.id == DestekTalebiKayitlarHaftalik.DestekTalebiKurum %}
+                            <div class="col-10 py-2 float-left"><a href="/TalepYonetimi/TLPkurumlarDetay/{{Nkurumlars.id}}">{{Nkurumlars.KurumAdi}}</a></div>
+                            <div class="col-2 py-2 float-left">{{DestekTalebiKayitlarHaftalik.total}}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-danger">
+                    Henüz Kayıt Girilen Kurum Yoktur
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 border p-3 float-left" style="background: #dbffc2">
+            ({{ Nbaslangic }}-{{ Nbaslangic }}) Toplam : {{ DestekTalebiKayitlarGunluksayi }}
+            <div class="p-2 border-3 border-bottom border-secondary"><h4>Bugün Gelen Çağrı</h4></div>
+            {% if DestekTalebiKayitlar %}
+                {% for Nkurumlars in Nkurumlars %}
+                    {% for DestekTalebiKayitlarGunluk in DestekTalebiKayitlarGunluk %}
+                        {% if Nkurumlars.id == DestekTalebiKayitlarGunluk.DestekTalebiKurum %}
+                            <div class="col-10 py-2 float-left"><a href="/TalepYonetimi/TLPkurumlarDetay/{{Nkurumlars.id}}">{{Nkurumlars.KurumAdi}}</a></div>
+                            <div class="col-2 py-2 float-left">{{DestekTalebiKayitlarGunluk.total}}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-danger">
+                    Henüz Kayıt Girilen Kurum Yoktur
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 border p-3 float-left" style="background: #ffd8d8">
+        <div class="p-2 border-3 border-bottom border-secondary"><h4>1 hafta içinde girilen destek adedi : {{DestekTalebiKayitlarHaftaliksayi}}</h4></div>
+        <img src="data:image/png;base64,{{data1}}" alt="" height="250", width="100%">
+            {% for DestekTalebiKayitlarhaftaliksayisi in DestekTalebiKayitlarhaftaliksayisi%}
+                        <div class="col-10 py-2 float-left">{{ DestekTalebiKayitlarhaftaliksayisi.DestekTalebiBaslamaTarihi}}</div>
+                        <div class="col-2 py-2 float-left">{{DestekTalebiKayitlarhaftaliksayisi.total}}</div>
+            {% endfor %}
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 border p-3 float-left" style="background: #dbffc2">
+            ({{ Nbaslangic }}-{{ Nbaslangic }}) Toplam : {{ DestekTalebiKayitlarGunluksayi }}
+            <div class="p-2 border-3 border-bottom border-secondary"><h4>1 hafta içinde girilen destek adedi :</h4></div>
+            <img src="data:image/png;base64,{{data}}" alt="" height="250", width="100%">
+            {% if DestekTalebiKayitlar %}
+                
+                {% for DestekTalebiKayitlarHaftalikuser in DestekTalebiKayitlarHaftalikuser %}
+                    {% for Nkullanici in Nkullanici %}
+                        {% if Nkullanici.id == DestekTalebiKayitlarHaftalikuser.DestekTalebiUser %}
+                            <div class="col-10 py-2 float-left">{{Nkullanici.id}}-{{Nkullanici.username}}</div>
+                            <div class="col-2 py-2 float-left">{{DestekTalebiKayitlarHaftalikuser.total}}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-danger">
+                    Henüz Kayıt Girilen Kurum Yoktur
+                </div>
+            {% endif %}
+        </div>
+
+<!--
+        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 border p-3 float-left" style="background: #dbffc2">
+        <div class="p-2 border-3 border-bottom border-secondary"><h4>En çok destek talep eden kullanıcılar</h4></div>
+            {% for kisilers in kisilers%}
+                {% for DestekTalebiKisiler in DestekTalebiKisiler %}
+                    {% if kisilers.id == DestekTalebiKisiler.DestekTalebiKisi%}
+                        <div class="col-10 py-2 float-left">{{kisilers.KisiAdiSoyadi}}</div>
+                        <div class="col-2 py-2 float-left">{{DestekTalebiKisiler.total}}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+-->
+    </div>
+{% endblock body %}

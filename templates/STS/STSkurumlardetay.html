@@ -1,0 +1,57 @@
+{% extends "STS/layout3.html" %}
+
+{% block body %}
+    {% load crispy_forms_tags %}
+    <!-- Page Content -->
+    <div class="container">
+        <h4>Kurum Detayları</h4>
+        <hr>
+        <div class="row">
+
+            {% csrf_token %}
+            <div class="col-12 col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                <div class="col-12 d-inline-block">
+                    <div class="col-4 float-left py-1"><strong>Kurum No</strong></div>
+                    <div class="col-8 float-left py-1">{{kurumlar.id}}</div>
+                </div>
+                <div class="col-12 d-inline-block">
+                    <div class="col-4 float-left py-1"><strong>Kurum Adı</strong></div>
+                    <div class="col-8 float-left py-1">{{kurumlar.KurumAdi}}</div>
+                </div>
+                <div class="col-12 d-inline-block">
+                    <div class="col-4 float-left py-1"><strong>Kurum İli</strong></div>
+                    <div class="col-8 float-left py-1">{{kurumlar.KurumIl}}</div>
+                </div>
+                <div class="col-12 d-inline-block">
+                    <div class="col-4 float-left py-1"><strong>Kurum Adresi</strong></div>
+                    <div class="col-8 float-left py-1">{{kurumlar.KurumAdres}}</div>
+                </div>
+                <div class="col-12 d-inline-block">
+                    <div class="col-4 float-left py-1"><strong>Kurum Maili</strong></div>
+                    <div class="col-8 float-left py-1">{{kurumlar.KurumEmail}}</div>
+                </div>
+                <div class="col-12 d-inline-block">
+                    <div class="col-4 float-left py-1"><strong>Kurum Telefonu</strong></div>
+                    <div class="col-8 float-left py-1">{{kurumlar.KurumTelefon}}</div>
+                </div>
+                <div class="col-12 d-inline-block">
+                    <div class="col-4 float-left py-1"><strong>Kurum Yetkilsi</strong> </div>
+                    <div class="col-8 float-left py-1">{{kurumlar.KurumYetkili}}</div>
+                </div>
+            </div>
+
+            <div class="col-12 pt-4">
+                {% if perms.Satis.change_satiskurumlar %}
+                <a href="/Satis/STSkurumlarguncelle/{{kurumlar.id}}" class="p-2 btn btn-primary">Güncelle</a>
+                {% endif %}
+                <a href="/Satis/STSkurumlar" class="btn btn-danger p-2 white " >Tüm Kurumlar</a>
+            </div>
+
+
+        </div>
+    </div>
+      <!-- /.row -->
+
+
+
+{% endblock body %}

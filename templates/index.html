@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr" class="loading">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/png" href="../../../static/assets/img/favicon.png"/>
+    <title>FASTSOFT</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../../static/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="../../../static/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../static/assets/libs/css/style.css">
+    <link rel="stylesheet" href="../../../static/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+
+</head>
+<body>
+<div class="container w-75 text-center p-3"><img src="../../../static/assets/img/crmlogo.png"/></div>
+<div class="bg-index container w-75 pb-5">
+        <div class="row p-5 text-center text-white text-uppercase">
+            {% if perms.TalepYonetimi %}
+            <div class="col-12 col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                <a href="/TalepYonetimi/TLPindex" class="font-weight-bold text-white">
+                    <div class="uygulama  col-12 py-5 px-3 my-2 font-weight-bold text-white" style="background: #140c42; opacity:0.6;">
+                        <p id="demo">Talep Takip</p>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+           {% if perms.Satis %}
+            <div class="col-12 col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                <a href="/Satis/STSindex">
+                    <div class="uygulama col-12 py-5 px-3 my-2 font-weight-bold text-white" style="background:#140c42; opacity:0.6;">
+                        Satış Takip
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+            {% if perms.PerTakip %}
+            <div class="col-12 col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                <a href="/PerTakip/PTKindex">
+                    <div class="uygulama col-12 py-5 px-3 my-2 font-weight-bold text-white" style="background:#140c42; opacity:0.6;">
+                        Personel İzin Takip
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+            {% if perms.auth %}
+            <div class="col-12 col-xl-4 col-lg-4 col-md-6 col-sm-6 font-weight-bold text-white ">
+                <a href="/Yonetim/YONindex" class="font-weight-bold text-white">
+                    <div class="uygulama col-12 py-5 px-3 my-2" style="background: #140c42; opacity:0.6;">
+                    Yönetim Paneli
+                </div>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+
+        <a class="text-white" href="/user/logout/">
+            <div class="row">
+                <button type="button" class="btn btn-block py-3 mx-5 font-weight-bold text-white uygulama " style="background: #140c42; opacity:0.6;">
+                        Çıkış
+                </button>
+
+            </div>
+
+        </a>
+
+    </div>
+
+
+    <script src="../../../static/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../../../static/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+</body>
+</html>

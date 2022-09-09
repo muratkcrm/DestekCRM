@@ -1,0 +1,47 @@
+{% extends "TLP/layout2.html" %}
+
+{% block body %}
+    <div class="container">
+        <h3 class="text-center">Istek Türü İşlemleri</h3>
+        {% if perms.TalepYonetim.add_destektalebituru %}
+        <a class="btn btn-success py-2 px-4 white mr-2 float-right" href="/TalepYonetimi/TLPDestekTalebiTuruEkle">Istek Turu Ekle</a>
+        {% endif %}
+        <hr>
+        {{request.session.DestekTalebiTuruSilMesaj}}
+        <br>
+
+
+    </div>
+    {% if DestekTalebiTurus %}
+    <div class="container">
+        <div class="row border border-darken-1">
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">Tür No</div>
+                <div class="col-3 col-md-3 border-left border-darken-1 py-2 d-none d-sm-block">Istek Adı</div>
+                <div class="col-6 col-md-6 border-left border-darken-1 py-2 d-none d-sm-block">Açıklama</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center">Güncelle</div>
+
+        </div>
+
+        {% for DestekTalebiTuru in DestekTalebiTurus %}
+
+        <div class="row border border-darken-1">
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">{{DestekTalebiTuru.id}}</div>
+            <div class="col-3 col-md-3 border-left border-darken-1 py-2 d-none d-sm-block">{{DestekTalebiTuru.DestekTalebiAdi}}</div>
+            <div class="col-6 col-md-6 col-sm-5 border-left border-darken-1 py-2">{{DestekTalebiTuru.DestekTalebiAciklama|safe|truncatewords:1}}</div>
+            <div class="col-2 col-md-2 col-sm-3 border-left border-darken-1 py-2 text-center">
+            {% if perms.TalepYonetimi.change_destektalebituru %}
+                <a href="/TalepYonetimi/TLPDestekTalebiTuruGuncelle/{{DestekTalebiTuru.id}}" class="btn btn-primary">Güncelle</a>
+            {% endif %}
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+{% else %}
+<div class="alert alert-danger">
+    Henüz Bilgi Girişi Yapılmamış...
+</div>
+{% endif %}
+
+{% endblock body %}

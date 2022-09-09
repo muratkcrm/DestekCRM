@@ -1,0 +1,50 @@
+{% extends "PTK/layout60.html" %}
+
+{% block body %}
+    {% load crispy_forms_tags %}
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Preview Image -->
+            <img class="img-fluid rounded" src="{{ PersonelKayits.PersonelKayits.url }}"/>
+            <!-- Post Content -->
+            <form method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+
+        <div class="row">
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel kayıt No: </strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.id}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Adı-Soyadı : </strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.PerTakipKayit}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Dönemi :</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.PerIzinDonemi }}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel İzin Başlama Tarihi :</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{PersonelKayit.PerIzinBaslatarihi|date:"d-m-Y" }}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel İzin Bitiş Tarihi :</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{PersonelKayit.PerIzinBitistarihi|date:"d-m-Y" }}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Konusu  :</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-93 float-left py-1">{{ PersonelKayit.PerIzinKonu|safe }}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Süresi Gün  :</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.PerIzinSuresiGun|safe}}</div>
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Süresi Saat  :</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.PerIzinSuresiSaat|safe}}</div>   
+            <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 float-left py-1"><strong>Personel Onay Veren  :</strong></div>
+               <div class="col-9 col-xl-9 col-lg-9 col-md-9 col-sm-9 float-left py-1">{{ PersonelKayit.PerIzinOnayVeren|safe}}</div>
+
+
+
+        </div>
+
+            {% if request.user.is_superuser == True or perms.PerTakip.change_pertakipkayit %}
+            <div class="col-12 pt-3">
+            <a href="/PerTakip/PTKIzinGuncelle/{{PersonelKayit.id}}" class="btn btn-success">Güncelle</a>
+            <a href="/PerTakip/PTKIzinSil/{{request.session.kayitGuncelleID}}" class="btn btn-danger">Kayıt Sil</a>
+            {% endif %}
+            <a href="/PerTakip/PTKIzinKayit" class="btn btn-primary py-2 px-4 white mr-2 " >Kayit Aramaya Git</a>
+            </div>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock body %}

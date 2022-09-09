@@ -1,0 +1,65 @@
+ <div class="container">
+        <div class="row border border-darken-1">
+             {% if PersonelKayits %}
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Kayıt No</div>
+                <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 border-left border-darken-1 py-3 px-1 text-center d-none d-lg-block">Personel Adı-Soyadı</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-lg-block">Dönemi</div>
+                <div class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">Izin Hakedilen Tarihi</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Izin Süresi</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block">Izin Durumu</div>
+                 <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center">Detay</div>
+        </div>
+
+            {% for PersonelKayit in PersonelKayits %}
+        <div class="row border border-darken-1 clearfix">
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block" value="{{ request.GET.Kelime }}">{{PersonelKayit.id}}</div>
+                <div class="col-3 col-xl-3 col-lg-3 col-md-3 col-sm-3 border-left border-darken-1 py-3 px-1 text-center d-none d-sm-block"><a href="/PerTakip/PTKHakedisIzinDetay/{{PersonelKayit.id}}">{{PersonelKayit.PerTakipKayit| truncatechars:"20"|safe}}</a></div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-sm-block"><a href="/PerTakip/PTKHakedisIzinDetay/{{PersonelKayit.id}}">{{PersonelKayit.PerIzinHakedisDonemi| truncatechars:"20"|safe}}</a></div>
+                <div class="col-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block"><a href="/PerTakip/PTKHakedisIzinDetay/{{PersonelKayit.id}}">{{PersonelKayit.PerIzinHakedistarihi|date:"d-m-Y" }}</a></div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-xl-block"><a href="/PerTakip/PTKHakedisIzinDetay/{{PersonelKayit.id}}">{{PersonelKayit.PerIzinHakedilenSure|safe }}</a></div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-1 px-1 text-center d-none d-xl-block"><a href="/PerTakip/PTKHakedisIzinDetay/{{PersonelKayit.id}}">{{PersonelKayit.PerIzinHakedisAktif|safe }}</a></div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-1 col-sm-2 border-left border-darken-1 py-1 px-1 text-center col-xs-2">
+
+                {% if request.user.is_superuser == True or perms.PerTakip.add_perizindurum %}
+                    <a href="/PerTakip/PTKIzinHakedisDetay/{{PersonelKayit.id}}" class="btn btn-primary py-2 px-2 white mr-2">islem</a>
+                {% else %}
+                    <a href="/PerTakip/PTKIzinHakedisDetay/{{PersonelKayit.id}}" class="btn btn-danger py-2 px-2 white mr-2">Gör</a>
+                {% endif %}
+
+                </div>
+        </div>
+
+            {% endfor %}
+
+                {% for contact in contacts %}
+                    {# Each "contact" is a Contact model object. #}
+                    {{ contact.full_name|upper }}<br>
+                    ...
+                {% endfor %}
+
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if PersonelKayit.has_previous %}
+                            <a href="?Sayfa=1{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">&laquo; ilk Sayfa</a>
+                            <a href="?Sayfa={{ PersonelKayit.previous_page_number }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">Bir Önceki</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Toplam {{ PersonelKayit.paginator.num_pages }} Sayfadan  {{ PersonelKayit.number }} . Sayfa
+                        </span>
+
+                        {% if PersonelKayit.has_next %}
+                            <a href="?Sayfa={{ PersonelKayit.next_page_number }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">Bir Sonraki</a>
+                            <a href="?Sayfa={{ PersonelKayit.paginator.num_pages }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">En son &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+
+                    <!-- ============================================================== -->
+                    <!-- end data table rowgroup  -->
+            {% else %}
+                <div class="alert alert-danger">
+                    Henüz Bilgi Girişi Yapılmamış...
+                </div>
+            {% endif %}
+    </div>

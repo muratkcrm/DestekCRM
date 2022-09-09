@@ -1,0 +1,46 @@
+{% extends "YON/layout4.html" %}
+
+
+{% block body %}
+
+    <div class="container">
+        <h3 class="text-center">Hesap Planı Kartı Geri Alma İşlemleri</h3>
+        <hr>
+    </div>
+    {% if HesapPlanis %}
+    <div class="container">
+        <div class="row border border-darken-1">
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">Ust Hesap Kodu</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-center d-none d-sm-block">Hesap Kodu</div>
+                <div class="col-5 col-md-5 border-left border-darken-1 py-2 text-center">Hesap Adı</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">Hesap Turu</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">Bilanço</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">Ozellik</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center ">Detay</div>
+        </div>
+
+            {% for HesapPlani in HesapPlanis %}
+
+        <div class="row border border-darken-1">
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-left d-none d-sm-block">{{HesapPlani.HesapUstKodu}}</div>
+                <div class="col-2 col-md-2 border-left border-darken-1 py-2 text-left d-none d-sm-block">{{HesapPlani.HesapKodu}}</div>
+                <div class="col-5 col-md-5 border-left border-darken-1 py-2">{{HesapPlani.HesapAdi }}</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 d-none d-sm-block">{{HesapPlani.HesapTuru}}</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 d-none d-sm-block">{{HesapPlani.HesapBilanco}}</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 d-none d-sm-block">{{HesapPlani.HesapOzelligi}}</div>
+                <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center">
+                     <a href="/Yonetim/YONonmhesapplaniGuncelle/{{HesapPlani.id}}" class="btn btn-primary">Aktiflik</a>
+                </div>
+        </div>
+            {% endfor %}
+
+    </div>
+
+{% else %}
+
+<div class="alert alert-danger">
+    Silinen Kayıt Kalmadı...
+</div>
+{% endif %}
+
+{% endblock body %}

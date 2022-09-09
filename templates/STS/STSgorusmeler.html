@@ -1,0 +1,100 @@
+{% extends "STS/layout3.html" %}
+
+
+{% block body %}
+    {% load crispy_forms_tags %}
+<!-- data table rowgroup  -->
+                    <!-- ============================================================== -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                    <h3 class="mb-4 text-center">Satış Görüşmeleri </h3>
+                                        <form method="GET" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div id="example4_filter" class="dataTables_filter ">
+                                            <input type="search" name="Kelime" value="{{ request.GET.Kelime }}" class="form-control form-control-sm float-left" aria-controls="example4" placeholder="Arama.." >
+                                            <button type="submit" class="float-left btn btn-primary py-2 px-4 white mr-2 ">Arama</button>
+                                            {% if perms.Satis.add_satisgorusmesi %}
+                                            <a style="float: right;" class="btn btn-success py-2 px-2 white mr-2 " href="/Satis/STSgorusmeekle">Kayıt Ekle</a>
+                                            {% endif %}
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            </div>
+                            </div>
+<!-- data table rowgroup  -->
+    <div class="container">
+        <div class="row border border-darken-1">
+            {% if STSgorusmelers %}
+                <div class="col-2 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">K. No</div>
+                <div class="col-1 col-xl-1 col-lg-1 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">Tarih</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-1 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">Uyg. Adı</div>
+                <div class="col-8 col-xl-4 col-lg-4 col-md-5 col-sm-4 border-left border-darken-1 py-2 px-1 text-center">Konu</div>
+                <div class="col-2 col-xl-2 col-lg-2 col-md-3 col-sm-3 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">Kurum</div>
+                <div class="col-1 col-xl-1 col-lg-1 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">Yetkili</div>
+                <div class="col-1 col-xl-1 col-lg-1 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">Durumu</div>
+                <div class="col-2 col-xl-1 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center">Detay</div>
+        </div>
+
+            {% for STSgorusmelers in STSgorusmelers %}
+        <div class="row border border-darken-1 clearfix">
+                <div class="col-2 col-xl-1 col-lg-1 col-md-1 col-sm-1 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">{{STSgorusmelers.id}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">{{STSgorusmelers.SatisBaslamaTarihi}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 col-md-2 col-sm-1 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">{{STSgorusmelers.SatisUygulama|safe}}</div>
+                <div class="col-8 col-xl-4 col-lg-4 col-md-5 col-sm-4 border-left border-darken-1 py-2 px-1 text-center col-xs-8">{{STSgorusmelers.SatisKonu|safe}}</div>
+                <div class="col-2 col-xl-2 col-lg-2 col-md-3 col-sm-3 border-left border-darken-1 py-2 px-1 text-center d-none d-sm-block">{{STSgorusmelers.SatisKurum|safe}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">{{STSgorusmelers.SatisGorusulenKisi|safe}}</div>
+                <div class="col-1 col-xl-1 col-lg-1 border-left border-darken-1 py-2 px-1 text-center d-none d-lg-block">{{STSgorusmelers.SatisDurumu|safe}}</div>
+                <div class="col-2 col-xl-1 col-lg-1 col-md-2 col-sm-2 border-left border-darken-1 py-2 px-1 text-center col-xs-2">
+
+                {% if request.user == STSgorusmelers.SatisUser or request.user.is_superuser == True or perms.Satis.add_stssatisnotlar %}
+                    <a href="/Satis/STSgorusmedetay/{{STSgorusmelers.id}}" class="btn btn-primary p-2 white mr-2">İşlem Yap</a>
+                {% else %}
+                    <a href="/Satis/STSgorusmedetay/{{STSgorusmelers.id}}" class="btn btn-danger py-2 px-2 white mr-2">Detayı Gör</a>
+                {% endif %}
+
+                </div>
+        </div>
+
+            {% endfor %}
+
+
+                {% for contact in contacts %}
+                    {# Each "contact" is a Contact model object. #}
+                    {{ contact.full_name|upper }}<br>
+                    ...
+                {% endfor %}
+
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if STSgorusmelers.has_previous %}
+                            <a href="?Sayfa=1{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">&laquo; ilk Sayfa</a>
+                            <a href="?Sayfa={{ STSgorusmelers.previous_page_number }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">Bir Önceki</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Toplam {{ STSgorusmelers.paginator.num_pages }} Sayfadan  {{ STSgorusmelers.number }} . Sayfa
+                        </span>
+
+                        {% if STSgorusmelers.has_next %}
+                            <a href="?Sayfa={{ STSgorusmelers.next_page_number }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">Bir Sonraki</a>
+                            <a href="?Sayfa={{ STSgorusmelers.paginator.num_pages }}{% if request.GET.Kelime %}&Kelime={{ request.GET.Kelime }}{% endif %}">En son &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+                    <!-- ============================================================== -->
+                    <!-- end data table rowgroup  -->
+            {% else %}
+                <div class="alert alert-danger">
+                    Henüz Bilgi Girişi Yapılmamış...
+                </div>
+            {% endif %}
+
+
+
+{% endblock body %}

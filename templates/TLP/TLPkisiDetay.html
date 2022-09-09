@@ -1,0 +1,37 @@
+{% extends "TLP/layout2.html" %}
+
+{% block body %}
+    {% load crispy_forms_tags %}
+    <!-- Page Content -->
+    <div class="container">
+            <h3>Kişi Detayları</h3>
+            <hr>
+      <div class="row">
+
+            {% csrf_token %}
+
+            <div class="col-3 col-md-3 float-left py-1"><strong>Kayıt No</strong></div>
+               <div class="col-9 py-1">{{kisiDetay.id}}</div>
+            <div class="col-3 col-md-3 float-left py-1"><strong>Kişi Ad Soyad</strong></div>
+               <div class="col-9 py-1">{{kisiDetay.KisiAdiSoyadi}}</div>
+            <div class="col-3 col-md-3 float-left py-1"><strong>Bağlı Kurumu</strong></div>
+               <div class="col-9 py-1">{{kisiDetay.KurumAdi}}</div>
+            <div class="col-3 col-md-3 float-left py-1"><strong>Bağlı Birimi</strong></div>
+               <div class="col-9 py-1">{{kisiDetay.KisiBirimAdi}}</div>
+            <div class="col-3 col-md-3 float-left py-1  fas fa-phone-slash"><strong> Telefon</strong></div>
+               <div class="col-9 py-1">{{kisiDetay.KisiTelefon}}</div>
+            <div class="col-3 col-md-3 float-left py-1  far fa-envelope"><strong> E-Mail</strong></div>
+               <div class="col-9 py-1">{{kisiDetay.KisiEmail}}</div>
+               <div class="col-12 pt-3">
+            {% if perms.TalepYonetimi.change_kisi %}
+            <a href="/TalepYonetimi/TLPkisiGuncelle/{{kisiDetay.id}}" class="btn btn-primary">Güncelle</a>
+            {% endif %}
+            <a href="/TalepYonetimi/TLPkisi" class="btn btn-danger py-2 px-4 white mr-2">Tüm Kayıtlar</a>
+            </div>
+      </div>
+    </div>
+      <!-- /.row -->
+
+
+
+{% endblock body %}

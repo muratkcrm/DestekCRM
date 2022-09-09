@@ -1,0 +1,63 @@
+{% extends "TLP/layout2.html" %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="text-center">Duyuru İşlemleri</h2>
+        {% if perms.TalepYonetimi.add_duyurular %}
+        <a style="float: right;" class="btn btn-success py-2 px-4 white mr-2 " href="/TalepYonetimi/TLPDuyuruEkle">Duyuru Ekle</a>
+        {% endif %}
+        <br>
+        <hr>
+    </div>
+    {% if Duyurulars %}
+    <div class="container">
+        <div class="row border border-darken-1">
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">D. No</div>
+            <div class="col-5 col-md-5 border-left border-darken-1 py-2">Duyuru Başlığı</div>
+            <div class="col-3 border-left border-darken-1 py-3 d-none d-sm-block">Duyuru Tarihi</div>
+            <div class="col-1 border-left border-darken-1 py-1 d-none d-sm-block">Durumu</div>
+            <div class="col-2 border-left border-darken-1 py-2 text-center">Detay</div>
+        </div>
+        <div class="row border border-darken-1">
+            {% for duyurular in Duyurulars %}
+
+            <div class="col-1 col-md-1 border-left border-darken-1 py-2 text-center d-none d-sm-block">{{duyurular.id}}</div>
+            <div class="col-5 col-md-5 border-left border-darken-1 py-2">{{duyurular.DuyuruBaslik|safe}}</div>
+            <div class="col-3 border-left border-darken-1 py-3 d-none d-sm-block">{{duyurular.DuyuruTarihi}}</div>
+            <div class="col-1 border-left border-darken-1 py-1 d-none d-sm-block">{{duyurular.DuyuruAktif}}</div>
+            <div class="col-2 border-left border-darken-1 my-2 text-center ">
+                {% if  request.user.is_superuser == True or perms.TalepYonetimi.add_duyurular %}
+                    <a href="/TalepYonetimi/TLPDuyuruDetay/{{duyurular.id}}" class="btn btn-primary">Detay İşlem</a>
+                {% else %}
+                    <a href="/TalepYonetimi/TLPDuyuruDetay/{{duyurular.id}}" class="btn btn-danger">Detay Gör</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if Duyurulars.has_previous %}
+                            <a href="?Sayfa=1">&laquo; ilk Sayfa</a>
+                            <a href="?Sayfa={{ Duyurulars.previous_page_number }}">Bir Önceki</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Toplam {{ Duyurulars.paginator.num_pages }} Sayfadan  {{ Duyurulars.number }} . Sayfa
+                        </span>
+
+                        {% if Duyurulars.has_next %}
+                            <a href="?Sayfa={{ Duyurulars.next_page_number }}">Bir Sonraki</a>
+                            <a href="?Sayfa={{ Duyurulars.paginator.num_pages }}">En son &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+        </div>
+    </div>
+
+{% else %}
+
+<div class="alert alert-danger">
+    Henüz Bilgi Girişi Yapılmamış...
+</div>
+{% endif %}
+
+{% endblock body %}

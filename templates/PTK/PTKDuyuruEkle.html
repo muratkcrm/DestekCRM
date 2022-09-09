@@ -1,0 +1,27 @@
+{% extends "PTK/layout60.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-12">
+        <h3>Duyuru Yayınla</h3>
+    </div>
+    <form method="post">
+            {% csrf_token %}
+            {{form.media}}
+            {{form|crispy}}
+            <!--  {{form.as_p}} -->
+            <br>
+            <div class="action-buttons mt-2 text-center ">
+                <hr style="margin-right:12%">
+                {% if perms.PerTakip.add_ptkduyurular %}
+                <button type="submit" class="btn btn-success py-2 px-4 white mr-2 ">Duyuru Ekle</button>
+                {% endif %}
+                <a class="btn btn-danger py-2 px-4 white mr-2 " href="/PerTakip/PTKDuyurular">Tüm Duyurular</a>
+                <hr style="margin-right:12%">
+            </div>
+        </form>
+</div>
+
+{% endblock body %}
